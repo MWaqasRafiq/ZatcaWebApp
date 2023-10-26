@@ -18,15 +18,7 @@
                 $("td", $(this).closest("tr")).removeClass("hover_row");
             });
         });
-
-
-
-
-
     </script>
-
-
-
     <link href="Styles/bootstrap.min.css" rel="stylesheet" type="text/css" />
     <script type="text/javascript" src="Scripts/bootstrap.min.js"></script>
     <link href="Styles/bootstrap-multiselect.css" rel="stylesheet" type="text/css" />
