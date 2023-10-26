@@ -1,0 +1,494 @@
+﻿<Project ToolsVersion="15.0" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <Import Project="..\packages\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.2.0.1\build\net46\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.props" Condition="Exists('..\packages\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.2.0.1\build\net46\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.props')" />
+  <Import Project="$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props" Condition="Exists('$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props')" />
+  <PropertyGroup>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
+    <ProductVersion>
+    </ProductVersion>
+    <SchemaVersion>2.0</SchemaVersion>
+    <ProjectGuid>{72A8F597-A39C-41E6-9D5C-FB44B823A75A}</ProjectGuid>
+    <ProjectTypeGuids>{349c5851-65df-11da-9384-00065b846f21};{fae04ec0-301f-11d3-bf4b-00c04f79efbc}</ProjectTypeGuids>
+    <OutputType>Library</OutputType>
+    <AppDesignerFolder>Properties</AppDesignerFolder>
+    <RootNamespace>ZatcaWebApp</RootNamespace>
+    <AssemblyName>ZatcaWebApp</AssemblyName>
+    <TargetFrameworkVersion>v4.7.2</TargetFrameworkVersion>
+    <UseIISExpress>true</UseIISExpress>
+    <Use64BitIISExpress />
+    <IISExpressSSLPort>44377</IISExpressSSLPort>
+    <IISExpressAnonymousAuthentication />
+    <IISExpressWindowsAuthentication />
+    <IISExpressUseClassicPipelineMode />
+    <UseGlobalApplicationHostFile />
+    <NuGetPackageImportStamp>
+    </NuGetPackageImportStamp>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>full</DebugType>
+    <Optimize>false</Optimize>
+    <OutputPath>bin\</OutputPath>
+    <DefineConstants>DEBUG;TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+    <AllowUnsafeBlocks>true</AllowUnsafeBlocks>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>pdbonly</DebugType>
+    <Optimize>true</Optimize>
+    <OutputPath>bin\</OutputPath>
+    <DefineConstants>TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <ItemGroup>
+    <Reference Include="AjaxControlToolkit">
+      <HintPath>..\..\GeniusCCOWebApp - Copy\GeniusCCOWebApp\bin\AjaxControlToolkit.dll</HintPath>
+    </Reference>
+    <Reference Include="BouncyCastle.Crypto, Version=1.8.9.0, Culture=neutral, PublicKeyToken=0e99375e54769942">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>D:\Desktop\_IDOL\ZATCA phase2\zatca-einvoicing-sdk-233-R3.1.9\zatca-einvoicing-sdk-233-R3.1.9\Lib\.Net\DLL\BouncyCastle.Crypto.dll</HintPath>
+    </Reference>
+    <Reference Include="IKVM.OpenJDK.Core, Version=8.1.5717.0, Culture=neutral, PublicKeyToken=13235d27fcbfff58, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>D:\Desktop\_IDOL\ZATCA phase2\zatca-einvoicing-sdk-233-R3.1.9\zatca-einvoicing-sdk-233-R3.1.9\Lib\.Net\DLL\IKVM.OpenJDK.Core.dll</HintPath>
+    </Reference>
+    <Reference Include="IKVM.OpenJDK.Text, Version=8.1.5717.0, Culture=neutral, PublicKeyToken=13235d27fcbfff58, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>D:\Desktop\_IDOL\ZATCA phase2\zatca-einvoicing-sdk-233-R3.1.9\zatca-einvoicing-sdk-233-R3.1.9\Lib\.Net\DLL\IKVM.OpenJDK.Text.dll</HintPath>
+    </Reference>
+    <Reference Include="IKVM.OpenJDK.Util, Version=8.1.5717.0, Culture=neutral, PublicKeyToken=13235d27fcbfff58, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>D:\Desktop\_IDOL\ZATCA phase2\zatca-einvoicing-sdk-233-R3.1.9\zatca-einvoicing-sdk-233-R3.1.9\Lib\.Net\DLL\IKVM.OpenJDK.Util.dll</HintPath>
+    </Reference>
+    <Reference Include="IKVM.OpenJDK.XML.API, Version=8.1.5717.0, Culture=neutral, PublicKeyToken=13235d27fcbfff58, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>D:\Desktop\_IDOL\ZATCA phase2\zatca-einvoicing-sdk-233-R3.1.9\zatca-einvoicing-sdk-233-R3.1.9\Lib\.Net\DLL\IKVM.OpenJDK.XML.API.dll</HintPath>
+    </Reference>
+    <Reference Include="IKVM.Runtime, Version=8.1.5717.0, Culture=neutral, PublicKeyToken=13235d27fcbfff58, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>D:\Desktop\_IDOL\ZATCA phase2\zatca-einvoicing-sdk-233-R3.1.9\zatca-einvoicing-sdk-233-R3.1.9\Lib\.Net\DLL\IKVM.Runtime.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.Bcl.AsyncInterfaces, Version=7.0.0.0, Culture=neutral, PublicKeyToken=cc7b13ffcd2ddd51, processorArchitecture=MSIL">
+      <HintPath>..\packages\Microsoft.Bcl.AsyncInterfaces.7.0.0\lib\net462\Microsoft.Bcl.AsyncInterfaces.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.CSharp" />
+    <Reference Include="Newtonsoft.Json, Version=6.0.0.0, Culture=neutral, PublicKeyToken=30ad4fe6b2a6aeed, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\..\..\..\..\..\Program Files\Microsoft SDKs\Azure\.NET SDK\v2.9\bin\plugins\Newtonsoft.Json.dll</HintPath>
+    </Reference>
+    <Reference Include="QRCoder">
+      <HintPath>..\..\..\..\..\Downloads\QRCode_Demo\QRCode_Demo\QRCode_Demo\bin\QRCoder.dll</HintPath>
+    </Reference>
+    <Reference Include="RestSharp">
+      <HintPath>..\..\GatewayServiceIDOL\GatewayService\bin\Debug\RestSharp.dll</HintPath>
+    </Reference>
+    <Reference Include="saxon-he-10.8, Version=10.8.0.0, Culture=neutral, PublicKeyToken=e1fdd002d5083fe6, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>D:\Desktop\_IDOL\ZATCA phase2\zatca-einvoicing-sdk-233-R3.1.9\zatca-einvoicing-sdk-233-R3.1.9\Lib\.Net\DLL\saxon-he-10.8.dll</HintPath>
+    </Reference>
+    <Reference Include="saxon-he-api-10.8, Version=10.8.0.0, Culture=neutral, PublicKeyToken=e1fdd002d5083fe6, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>D:\Desktop\_IDOL\ZATCA phase2\zatca-einvoicing-sdk-233-R3.1.9\zatca-einvoicing-sdk-233-R3.1.9\Lib\.Net\DLL\saxon-he-api-10.8.dll</HintPath>
+    </Reference>
+    <Reference Include="SDKNETFrameWorkLib, Version=1.0.0.0, Culture=neutral, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>D:\Desktop\_IDOL\ZATCA phase2\zatca-einvoicing-sdk-232-R3.1.8\zatca-einvoicing-sdk-232-R3.1.8\Lib\.Net\DLL\SDKNETFrameWorkLib.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Buffers, Version=4.0.3.0, Culture=neutral, PublicKeyToken=cc7b13ffcd2ddd51, processorArchitecture=MSIL">
+      <HintPath>..\packages\System.Buffers.4.5.1\lib\net461\System.Buffers.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Memory, Version=4.0.1.2, Culture=neutral, PublicKeyToken=cc7b13ffcd2ddd51, processorArchitecture=MSIL">
+      <HintPath>..\packages\System.Memory.4.5.5\lib\net461\System.Memory.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Net.Http" />
+    <Reference Include="System.Net.Http.Formatting">
+      <HintPath>..\..\..\..\source\repos\newGatewayService\GatewayServiceCARREFOUR\GatewayService\bin\Debug\System.Net.Http.Formatting.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Net.Http.Primitives">
+      <HintPath>..\..\..\..\Documents\Visual Studio 2015\Projects\GatewayServiceIDOL\GatewayService\bin\Debug\System.Net.Http.Primitives.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Net.Http.WebRequest" />
+    <Reference Include="System.Numerics" />
+    <Reference Include="System.Numerics.Vectors, Version=4.1.4.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a, processorArchitecture=MSIL">
+      <HintPath>..\packages\System.Numerics.Vectors.4.5.0\lib\net46\System.Numerics.Vectors.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Runtime.CompilerServices.Unsafe, Version=6.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a, processorArchitecture=MSIL">
+      <HintPath>..\packages\System.Runtime.CompilerServices.Unsafe.6.0.0\lib\net461\System.Runtime.CompilerServices.Unsafe.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Security" />
+    <Reference Include="System.Security.Cryptography.Xml, Version=7.0.0.1, Culture=neutral, PublicKeyToken=cc7b13ffcd2ddd51, processorArchitecture=MSIL">
+      <HintPath>..\packages\System.Security.Cryptography.Xml.7.0.1\lib\net462\System.Security.Cryptography.Xml.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Text.Encodings.Web, Version=7.0.0.0, Culture=neutral, PublicKeyToken=cc7b13ffcd2ddd51, processorArchitecture=MSIL">
+      <HintPath>..\packages\System.Text.Encodings.Web.7.0.0\lib\net462\System.Text.Encodings.Web.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Text.Json, Version=7.0.0.2, Culture=neutral, PublicKeyToken=cc7b13ffcd2ddd51, processorArchitecture=MSIL">
+      <HintPath>..\packages\System.Text.Json.7.0.2\lib\net462\System.Text.Json.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Threading.Tasks.Extensions, Version=4.2.0.1, Culture=neutral, PublicKeyToken=cc7b13ffcd2ddd51, processorArchitecture=MSIL">
+      <HintPath>..\packages\System.Threading.Tasks.Extensions.4.5.4\lib\net461\System.Threading.Tasks.Extensions.dll</HintPath>
+    </Reference>
+    <Reference Include="System.ValueTuple, Version=4.0.3.0, Culture=neutral, PublicKeyToken=cc7b13ffcd2ddd51, processorArchitecture=MSIL">
+      <HintPath>..\packages\System.ValueTuple.4.5.0\lib\net47\System.ValueTuple.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Web.DataVisualization" />
+    <Reference Include="System.Web.DynamicData" />
+    <Reference Include="System.Web.Entity" />
+    <Reference Include="System.Web.ApplicationServices" />
+    <Reference Include="System.ComponentModel.DataAnnotations" />
+    <Reference Include="System" />
+    <Reference Include="System.Data" />
+    <Reference Include="System.Core" />
+    <Reference Include="System.Data.DataSetExtensions" />
+    <Reference Include="System.Web.Extensions" />
+    <Reference Include="System.Web.Http">
+      <HintPath>..\..\..\..\source\repos\newGatewayService\GatewayServiceCARREFOUR\GatewayService\bin\Debug\System.Web.Http.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Web.Http.Owin">
+      <HintPath>..\..\..\..\source\repos\newGatewayService\GatewayServiceCARREFOUR\GatewayService\bin\Debug\System.Web.Http.Owin.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Xml.Linq" />
+    <Reference Include="System.Drawing" />
+    <Reference Include="System.Web" />
+    <Reference Include="System.Xml" />
+    <Reference Include="System.Configuration" />
+    <Reference Include="System.Web.Services" />
+    <Reference Include="System.EnterpriseServices" />
+  </ItemGroup>
+  <ItemGroup>
+    <Reference Include="Microsoft.CodeDom.Providers.DotNetCompilerPlatform">
+      <HintPath>..\packages\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.2.0.1\lib\net45\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.dll</HintPath>
+    </Reference>
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="BranchInvReport.aspx" />
+    <Content Include="Change_pw.aspx" />
+    <Content Include="CreateUser.aspx" />
+    <Content Include="CustomerRegistration.aspx" />
+    <Content Include="CustomersReport.aspx" />
+    <Content Include="EditInvoice.aspx" />
+    <Content Include="EgsConfig.aspx" />
+    <Content Include="Home.aspx" />
+    <Content Include="images\1.png" />
+    <Content Include="images\11.png" />
+    <Content Include="images\2.jpg" />
+    <Content Include="images\2.png" />
+    <Content Include="images\3.png" />
+    <Content Include="images\4.jpg" />
+    <Content Include="images\5.jpg" />
+    <Content Include="images\6.jpg" />
+    <Content Include="images\A101_logo.png" />
+    <Content Include="images\adduser.png" />
+    <Content Include="images\blueslate_background.gif" />
+    <Content Include="images\blueslate_backgroundOVER.gif" />
+    <Content Include="images\Calendar-icon.png" />
+    <Content Include="images\clock.png" />
+    <Content Include="images\df6de839-3f7d-41c6-9f62-ddb72b0c1590.jfif" />
+    <Content Include="images\exit.png" />
+    <Content Include="images\farm.jpg" />
+    <Content Include="images\farm.png" />
+    <Content Include="images\farmlogo.png" />
+    <Content Include="images\form_bg.jpg" />
+    <Content Include="images\grid-alt.png" />
+    <Content Include="images\grid-header.png" />
+    <Content Include="images\grid-pgr.png" />
+    <Content Include="images\home.png" />
+    <Content Include="images\icon-load.gif" />
+    <Content Include="images\im\1.jpg" />
+    <Content Include="images\im\11111.jpg" />
+    <Content Include="images\im\2.jpg" />
+    <Content Include="images\im\2.svg" />
+    <Content Include="images\im\21.jpg" />
+    <Content Include="images\im\211.htm" />
+    <Content Include="images\im\211.jpg" />
+    <Content Include="images\im\211rfsf.jpg" />
+    <Content Include="images\im\22222222222222.jpg" />
+    <Content Include="images\im\23r2r.jpg" />
+    <Content Include="images\im\324.jpg" />
+    <Content Include="images\im\3424.jpg" />
+    <Content Include="images\im\5.jpg" />
+    <Content Include="images\im\ada.jpg" />
+    <Content Include="images\im\bg.jpg" />
+    <Content Include="images\im\boxtop_02.png" />
+    <Content Include="images\im\esfsf.jpg" />
+    <Content Include="images\im\fsf.jpg" />
+    <Content Include="images\im\qwe.jpg" />
+    <Content Include="images\im\serw.jpg" />
+    <Content Include="images\im\sfsdf.jpg" />
+    <Content Include="images\invalid.jpg" />
+    <Content Include="images\logo.jpg" />
+    <Content Include="images\logout.png" />
+    <Content Include="InvoiceCounters.aspx" />
+    <Content Include="Login.aspx" />
+    <Content Include="Onboard.aspx" />
+    <Content Include="Roles.aspx" />
+    <Content Include="Scripts\bootstrap-multiselect.js" />
+    <Content Include="Scripts\bootstrap-timepicker.js" />
+    <Content Include="Scripts\bootstrap-timepicker.min.js" />
+    <Content Include="Scripts\bootstrap.js" />
+    <Content Include="Scripts\bootstrap.min.js" />
+    <Content Include="Scripts\calendar-en.min.js" />
+    <Content Include="Scripts\clavierarabe5000.com.exe" />
+    <None Include="Scripts\jquery-1.4.1-vsdoc.js" />
+    <Content Include="Scripts\jquery-1.4.1.js" />
+    <Content Include="Scripts\jquery-1.4.1.min.js" />
+    <None Include="Scripts\jquery-1.6.3-vsdoc.js" />
+    <Content Include="Scripts\jquery-1.6.3.js" />
+    <Content Include="Scripts\jquery-1.6.3.min.js" />
+    <None Include="Scripts\jquery-1.9.1.intellisense.js" />
+    <Content Include="Scripts\jquery-1.9.1.js" />
+    <Content Include="Scripts\jquery-1.9.1.min.js" />
+    <Content Include="Scripts\jquery-2.2.0.min.js" />
+    <Content Include="Scripts\jquery-ui.js" />
+    <Content Include="Scripts\jquery-ui.min.js" />
+    <Content Include="Scripts\jquery.dynDateTime.min.js" />
+    <Content Include="Scripts\jquery.idle-timer.js" />
+    <Content Include="Scripts\jquery.min.js" />
+    <Content Include="Scripts\jquery.min1.js" />
+    <Content Include="Scripts\jquery.timepicker.js" />
+    <Content Include="Scripts\moment-with-locales.js" />
+    <Content Include="Scripts\moment-with-locales.min.js" />
+    <Content Include="Scripts\moment.js" />
+    <Content Include="Scripts\moment.min.js" />
+    <Content Include="Scripts\timeout-dialog.js" />
+    <Content Include="Scripts\toastr.js" />
+    <Content Include="Scripts\toastr.min.js" />
+    <Content Include="searchInvoice.aspx" />
+    <Content Include="StoresList.aspx" />
+    <Content Include="Styles\bootstrap-datetimepicker.min.css" />
+    <Content Include="Styles\bootstrap-multiselect.css" />
+    <Content Include="Styles\bootstrap-timepicker.css" />
+    <Content Include="Styles\bootstrap-timepicker.min.css" />
+    <Content Include="Styles\bootstrap.min.css" />
+    <Content Include="Styles\calendar-blue.css" />
+    <Content Include="Styles\grd_alt.png" />
+    <Content Include="Styles\grd_head.png" />
+    <Content Include="Styles\grd_pgr.png" />
+    <Content Include="Styles\index.css" />
+    <Content Include="Styles\jquery-ui.css" />
+    <Content Include="Styles\jquery-ui.min.css" />
+    <Content Include="Styles\jquery-ui.structure.css" />
+    <Content Include="Styles\jquery-ui.structure.min.css" />
+    <Content Include="Styles\jquery-ui.theme.css" />
+    <Content Include="Styles\jquery-ui.theme.min.css" />
+    <Content Include="Styles\jquery.timepicker.css" />
+    <Content Include="Styles\pager.css" />
+    <Content Include="Styles\Site - Copy.css" />
+    <Content Include="Styles\Site - old.css" />
+    <Content Include="Styles\Site.css" />
+    <Content Include="Styles\timeout-dialog.css" />
+    <Content Include="Styles\toastr.css" />
+    <Content Include="Styles\toastr.min.css" />
+    <Content Include="UploadInvoice.aspx" />
+    <Content Include="ViewActions.aspx" />
+    <Content Include="ViewEGSConfigs.aspx" />
+    <Content Include="ViewErrorsWarnings.aspx" />
+    <Content Include="Viewinvoices.aspx" />
+    <Content Include="Web.config" />
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="Basepage.cs" />
+    <Compile Include="BranchInvReport.aspx.cs">
+      <DependentUpon>BranchInvReport.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="BranchInvReport.aspx.designer.cs">
+      <DependentUpon>BranchInvReport.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Change_pw.aspx.cs">
+      <DependentUpon>Change_pw.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Change_pw.aspx.designer.cs">
+      <DependentUpon>Change_pw.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Class1.cs" />
+    <Compile Include="CreateUser.aspx.cs">
+      <DependentUpon>CreateUser.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="CreateUser.aspx.designer.cs">
+      <DependentUpon>CreateUser.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="CustomerRegistration.aspx.cs">
+      <DependentUpon>CustomerRegistration.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="CustomerRegistration.aspx.designer.cs">
+      <DependentUpon>CustomerRegistration.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="CustomersReport.aspx.cs">
+      <DependentUpon>CustomersReport.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="CustomersReport.aspx.designer.cs">
+      <DependentUpon>CustomersReport.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="EditInvoice.aspx.cs">
+      <DependentUpon>EditInvoice.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="EditInvoice.aspx.designer.cs">
+      <DependentUpon>EditInvoice.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="EgsConfig.aspx.cs">
+      <DependentUpon>EgsConfig.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="EgsConfig.aspx.designer.cs">
+      <DependentUpon>EgsConfig.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Home.aspx.cs">
+      <DependentUpon>Home.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Home.aspx.designer.cs">
+      <DependentUpon>Home.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Invoice.cs" />
+    <Compile Include="InvoiceCounters.aspx.cs">
+      <DependentUpon>InvoiceCounters.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="InvoiceCounters.aspx.designer.cs">
+      <DependentUpon>InvoiceCounters.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Login.aspx.cs">
+      <DependentUpon>Login.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Login.aspx.designer.cs">
+      <DependentUpon>Login.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Onboard.aspx.cs">
+      <DependentUpon>Onboard.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Onboard.aspx.designer.cs">
+      <DependentUpon>Onboard.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Roles.aspx.cs">
+      <DependentUpon>Roles.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Roles.aspx.designer.cs">
+      <DependentUpon>Roles.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="searchInvoice.aspx.cs">
+      <DependentUpon>searchInvoice.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="searchInvoice.aspx.designer.cs">
+      <DependentUpon>searchInvoice.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="signDLL\HashingValidator.cs" />
+    <Compile Include="signDLL\QRValidator.cs" />
+    <Compile Include="signDLL\SettingsParams.cs" />
+    <Compile Include="signDLL\signdll.cs" />
+    <Compile Include="signDLL\Utility.cs" />
+    <Compile Include="Site.Master.cs">
+      <DependentUpon>Site.Master</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Site.Master.designer.cs">
+      <DependentUpon>Site.Master</DependentUpon>
+    </Compile>
+    <Compile Include="StoresList.aspx.cs">
+      <DependentUpon>StoresList.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="StoresList.aspx.designer.cs">
+      <DependentUpon>StoresList.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="UploadInvoice.aspx.cs">
+      <DependentUpon>UploadInvoice.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="UploadInvoice.aspx.designer.cs">
+      <DependentUpon>UploadInvoice.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="util.cs" />
+    <Compile Include="ViewActions.aspx.cs">
+      <DependentUpon>ViewActions.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="ViewActions.aspx.designer.cs">
+      <DependentUpon>ViewActions.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="ViewEGSConfigs.aspx.cs">
+      <DependentUpon>ViewEGSConfigs.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="ViewEGSConfigs.aspx.designer.cs">
+      <DependentUpon>ViewEGSConfigs.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="ViewErrorsWarnings.aspx.cs">
+      <DependentUpon>ViewErrorsWarnings.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="ViewErrorsWarnings.aspx.designer.cs">
+      <DependentUpon>ViewErrorsWarnings.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Viewinvoices.aspx.cs">
+      <DependentUpon>Viewinvoices.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Viewinvoices.aspx.designer.cs">
+      <DependentUpon>Viewinvoices.aspx</DependentUpon>
+    </Compile>
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="packages.config" />
+    <Content Include="Site.Master" />
+    <Content Include="Scripts\jquery-1.9.1.min.map" />
+    <Content Include="Styles\timepicker.less" />
+    <None Include="Web.Debug.config">
+      <DependentUpon>Web.config</DependentUpon>
+    </None>
+    <None Include="Web.Release.config">
+      <DependentUpon>Web.config</DependentUpon>
+    </None>
+  </ItemGroup>
+  <PropertyGroup>
+    <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">10.0</VisualStudioVersion>
+    <VSToolsPath Condition="'$(VSToolsPath)' == ''">$(MSBuildExtensionsPath32)\Microsoft\VisualStudio\v$(VisualStudioVersion)</VSToolsPath>
+  </PropertyGroup>
+  <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.targets" />
+  <Import Project="$(VSToolsPath)\WebApplications\Microsoft.WebApplication.targets" Condition="'$(VSToolsPath)' != ''" />
+  <Import Project="$(MSBuildExtensionsPath32)\Microsoft\VisualStudio\v10.0\WebApplications\Microsoft.WebApplication.targets" Condition="false" />
+  <ProjectExtensions>
+    <VisualStudio>
+      <FlavorProperties GUID="{349c5851-65df-11da-9384-00065b846f21}">
+        <WebProjectProperties>
+          <UseIIS>True</UseIIS>
+          <AutoAssignPort>True</AutoAssignPort>
+          <DevelopmentServerPort>58718</DevelopmentServerPort>
+          <DevelopmentServerVPath>/</DevelopmentServerVPath>
+          <IISUrl>https://localhost:44377/</IISUrl>
+          <NTLMAuthentication>False</NTLMAuthentication>
+          <UseCustomServer>False</UseCustomServer>
+          <CustomServerUrl>
+          </CustomServerUrl>
+          <SaveServerSettingsInUserFile>False</SaveServerSettingsInUserFile>
+        </WebProjectProperties>
+      </FlavorProperties>
+    </VisualStudio>
+  </ProjectExtensions>
+  <Target Name="EnsureNuGetPackageBuildImports" BeforeTargets="PrepareForBuild">
+    <PropertyGroup>
+      <ErrorText>This project references NuGet package(s) that are missing on this computer. Use NuGet Package Restore to download them.  For more information, see http://go.microsoft.com/fwlink/?LinkID=322105. The missing file is {0}.</ErrorText>
+    </PropertyGroup>
+    <Error Condition="!Exists('..\packages\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.2.0.1\build\net46\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.props')" Text="$([System.String]::Format('$(ErrorText)', '..\packages\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.2.0.1\build\net46\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.props'))" />
+  </Target>
+  <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
+       Other similar extension points exist, see Microsoft.Common.targets.
+  <Target Name="BeforeBuild">
+  </Target>
+  <Target Name="AfterBuild">
+  </Target>
+  -->
+</Project>

@@ -1,0 +1,177 @@
+﻿.mydatagrid
+{
+    border: solid 1px black;
+    /*min-width: 80%;*/
+}
+.header_in_pager
+{
+    background-color: #808080;
+    font-family:'Lucida Sans', 'Lucida Sans Regular', 'Lucida Grande', 'Lucida Sans Unicode', Geneva, Verdana, sans-serif;
+    color: #ffffff;
+    /*border: none 0px transparent;*/
+    border-color:darkgray;
+    height: 25px;
+    text-align: center;
+    font-size: 9px;
+    color:white;
+    text-decoration:none;
+    
+    
+}
+.rows
+{
+    background-color: #fff;
+    font-family: Arial;
+    font-size: 10px;
+    color: #000;
+    min-height: 25px;
+    text-align: left;
+    border: none 0px transparent;
+}
+.rows:hover
+{
+    background-color: darksalmon;
+    font-family: Arial;
+    color: chocolate;
+    text-align: left;
+}
+.selectedrow
+{
+    background-color: darksalmon;
+    font-family: Arial;
+    color: #fff;
+    font-weight: bold;
+    text-align: left;
+}
+.mydatagrid a /** FOR THE PAGING ICONS  **/
+{
+    background-color: Transparent;
+    padding: 5px 5px 5px 5px;
+    color: #fff;
+    text-decoration: none;
+    font-weight: bold;
+}
+.mydatagrid a:hover /** FOR THE PAGING ICONS  HOVER STYLES**/
+{
+    background-color: #000;
+    color: #fff;
+}
+.mydatagrid span /** FOR THE PAGING ICONS CURRENT PAGE INDICATOR **/
+{
+    background-color: #c9c9c9;
+    color: #000;
+    padding: 5px 5px 5px 5px;
+}
+.pager
+{
+    background-color: #808080;
+    font-family: Arial;
+    color: White;
+    height: 25px;
+    text-align: left;
+}
+.mydatagrid td
+{
+    padding: 5px;
+}
+.mydatagrid th
+{
+    padding: 5px;
+}
+/*------------------------------------------------------------------------------- new GridView --------------------------------------------------------*/
+     .AltRow{
+             background-image: url(images/im/2.jpg); 
+           background-repeat:repeat-x;
+           opacity:.7;
+
+
+          
+     }
+    
+     .EditRow{
+
+     }
+     .FooterRow{
+
+     }
+     .HeaderRow{
+         background-image: url(images/im/2.jpg); 
+           background-repeat:repeat-x;
+           text-align:center;
+            
+     }
+     
+     .PagerRow table {
+         float:right;
+ background-color:lightyellow;
+ width:auto;
+ font-size:15px;
+ height:auto;
+ 
+     }
+     .PagerRow{
+
+     }
+     .PagerRow table td {
+         padding-right:10px;
+        
+     }
+
+     
+     .eachRow{
+      background-image: url(images/im/2.jpg); 
+           background-repeat:repeat-x;
+           
+  
+          
+     } 
+    .hover_row
+    {
+        background-color: #9ac19a;
+       
+    }
+    .gvMain{
+     
+   background-image: url(images/im/2.jpg); 
+    /*background-color:    wheat;*/
+    -moz-border-radius: 160px;
+    -webkit-border-radius: 160px;
+    border-radius: 100px;
+
+        min-width:1140px;
+        min-height:500px;
+ 
+
+    }
+       .rounded-corners
+        {
+            border: 1px solid white;
+            -webkit-border-radius: 18px;
+            -moz-border-radius: 18px;
+            border-radius: 18px;
+            overflow: hidden;
+        }
+/*------------------------------------------------------------------------------- new GridView --------------------------------------------------------*/
+
+.Button_top_group{
+    background-color:white;
+    width:230px;
+    height:32px;
+    font-family:'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
+    
+    
+}
+#B2,#B3{border-left:none;
+     
+}
+.Button_top_group:hover{
+   background-color:darkgray;
+
+}
+#txtTo,#txtFrom{
+    width:150px;
+    height:19px;
+}
+#lbl_To, #lbl_From {
+    font-family:'Times New Roman', Times, serif;
+}
