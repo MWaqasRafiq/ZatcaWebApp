@@ -7,4 +7,12 @@
     <RootNamespace>ZatcaWebApp_V2</RootNamespace>
   </PropertyGroup>
 
+  <ItemGroup>
+    <PackageReference Include="Microsoft.Data.SqlClient" Version="5.1.2" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\ZatcaWebApp\ZatcaWebApp.csproj" />
+  </ItemGroup>
+
 </Project>
