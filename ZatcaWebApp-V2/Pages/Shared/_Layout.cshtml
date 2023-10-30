@@ -207,12 +207,10 @@
     <script src="~/js/front.js"></script>
     <script>
         function injectSvgSprite(path) {
-            debugger;
             var ajax = new XMLHttpRequest();
             ajax.open("GET", path, true);
             ajax.send();
             ajax.onload = function (e) {
-            debugger;
                 var div = document.createElement("div");
                 div.className = 'd-none';
                 div.innerHTML = ajax.responseText;

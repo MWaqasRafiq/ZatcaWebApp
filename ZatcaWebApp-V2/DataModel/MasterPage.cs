@@ -48,7 +48,7 @@ namespace ZatcaWebApp_V2.DataModel
             List<T> entity = new List<T>();
             try
             {
-                using (var command = _context.Database.GetDbConnection().CreateCommand())
+                await using (var command = _context.Database.GetDbConnection().CreateCommand())
                 {
                     command.CommandText = storedProcedure;
                     if (IsProcedure)
@@ -69,6 +69,7 @@ namespace ZatcaWebApp_V2.DataModel
                     using (var dataReader = await command.ExecuteReaderAsync())
                     {
                         entity = DataReaderMapToList<T>(dataReader);
+                        command.Connection.Close();
                         return entity;
                     }
                 }

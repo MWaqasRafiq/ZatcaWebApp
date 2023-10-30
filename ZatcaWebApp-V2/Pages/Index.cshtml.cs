@@ -26,32 +26,46 @@ namespace ZatcaWebApp_V2.Pages
             _masterPage = new MasterPage(_logger, _configuration, _context);
         }
         public ChartJs Chart { get; set; }
-        public string ChartJson { get; set; }
-        public List<int> GetJson()
+        public string VatChartJson { get; set; }
+        public string VatProcChartJson { get; set; }
+        public string VatB2BChartJson { get; set; }
+
+        public async Task<IActionResult> OnGetAsync()
         {
-            //get the data you want from database...
-            int[] data = { 6,2,3 };
-            return data.ToList();
+            var res = LoadVATChartData().GetAwaiter().GetResult();
+            return Page();
         }
-        public async void OnGet()
+
+        public async Task<bool> LoadVATChartData()
         {
-            var data = await LoadChartData();
-            var chartData = @"{
+            List<DashboardChartData> data = new List<DashboardChartData>();
+            try
+            {
+                string qq = @"select  
+                            (select sum(taxtotal) from invoices where LTRIM(RTRIM(ActionStatus))  in('Cleared','Reported')) as TotalVatSubmitted,
+                            (select sum(taxtotal) from invoices where LTRIM(RTRIM(ActionStatus)) not  in('Cleared','Reported')) as TotalVatFailed,
+                            CAST('0' as int) as VATPending,
+                            (select count(id) from invoices) as CountProcessed,
+                            (select sum(taxtotal) from invoices) as VATProcessed,
+                            (select sum(taxtotal) from invoices where DocType='B2B') as VatB2B,
+                            (select sum(taxtotal) from invoices where DocType='B2C') as VatB2C";
+                data = await _masterPage.ExecuteStoredProcedure<DashboardChartData>(qq,new List<SqlParameter>(),false);
+                var chartData = @"{
                 type: 'pie',
                 responsive: true
                 ,data:
                 {
-                    labels: ['Red', 'Blue'],
+                    labels: ['Failed', 'Submitted'],
                     datasets: [{
                         label: 'VAT',
                         data: [],
                         backgroundColor: [
-                        'rgba(255, 99, 132, 0.2)',
-                        'rgba(54, 162, 235, 0.2)',
+                        'rgba(255, 118, 118, 1)',
+                        'rgba(121, 106, 238, 1)',
                             ],
                         borderColor: [
-                        'rgba(255, 99, 132, 1)',
-                        'rgba(54, 162, 235, 1)',
+                        'rgba(255, 118, 118, 0.7)',
+                        'rgba(121, 106, 238, 0.7)',
                             ],
                         borderWidth: 1
                     }]
@@ -70,51 +84,119 @@ namespace ZatcaWebApp_V2.Pages
                 }
             }";
 
-            Chart = JsonConvert.DeserializeObject<ChartJs>(chartData);
+                Chart = JsonConvert.DeserializeObject<ChartJs>(chartData) ?? new ChartJs();
 
-            var res = GetJson();  //get the data
+                Chart.data.datasets[0].data = new int[2];
+                Chart.data.datasets[0].data[1] = data[0].TotalVatSubmitted > 0 ? Convert.ToInt32(data[0].TotalVatSubmitted) : 0;
+                Chart.data.datasets[0].data[0] = data[0].TotalVatFailed > 0 ? Convert.ToInt32(data[0].TotalVatFailed) : 0;
 
-            //must remember to initialize the array....
-            Chart.data.datasets[0].data = new int[res.Count()];
-            //for (int i = 0; i < res.Count(); i++)
-            //{
-            //    Chart.data.datasets[0].data[i] = res[i];
-            //}
-            if(data[0].TotalVatSubmitted > 0)
-                    Chart.data.datasets[0].data[0] = Convert.ToInt32(data[0].TotalVatSubmitted);
-            else
-                    Chart.data.datasets[0].data[0] = 0;
-            if(data[0].TotalVatFailed > 0)
-                Chart.data.datasets[0].data[1] = Convert.ToInt32(data[0].TotalVatFailed);
-            else
-                Chart.data.datasets[0].data[1] = 0;
-            ChartJson = JsonConvert.SerializeObject(Chart, new JsonSerializerSettings
-            {
-                NullValueHandling = NullValueHandling.Ignore,
-            });
-        }
+                VatChartJson = JsonConvert.SerializeObject(Chart, new JsonSerializerSettings
+                {
+                    NullValueHandling = NullValueHandling.Ignore,
+                });
 
-        public async Task<List<DashboardChartData>> LoadChartData()
-        {
-            List<DashboardChartData> chartData = new List<DashboardChartData>();
-            try
-            {
-                string qq = @"select  
-                            (select sum(taxtotal) from invoices where LTRIM(RTRIM(ActionStatus))  in('Cleared','Reported')) as TotalVatSubmitted,
-                            (select sum(taxtotal) from invoices where LTRIM(RTRIM(ActionStatus)) not  in('Cleared','Reported')) as TotalVatFailed,
-                            CAST('0' as int) as VATPending,
-                            (select count(id) from invoices) as CountProcessed,
-                            (select sum(taxtotal) from invoices) as VATProcessed,
-                            (select sum(taxtotal) from invoices where DocType='B2B') as VatB2B,
-                            (select sum(taxtotal) from invoices where DocType='B2C') as VatB2C";
-                chartData = await _masterPage.ExecuteStoredProcedure<DashboardChartData>(qq,new List<SqlParameter>(),false);
-                //DataTable dt = await masterPage.getDataDBQuery(qq);
+                chartData = @"{
+                type: 'pie',
+                responsive: true
+                ,data:
+                {
+                    labels: ['Pending', 'Processed', 'Count'],
+                    datasets: [{
+                        label: 'VAT',
+                        data: [],
+                        backgroundColor: [
+                        'rgba(255, 118, 118, 1)',
+                        'rgba(121, 106, 238, 1)',
+                        'rgba(255, 195, 109, 1)',
+                            ],
+                        borderColor: [
+                        'rgba(255, 118, 118, 0.7)',
+                        'rgba(121, 106, 238, 0.7)',
+                        'rgba(255, 195, 109, 0.7)',
+                            ],
+                        borderWidth: 1
+                    }]
+                },
+                options:
+                {
+                    scales:
+                    {
+                        yAxes: [{
+                            ticks:
+                            {
+                                beginAtZero: true
+                            }
+                        }]
+                    }
+                }
+            }";
+
+                Chart = JsonConvert.DeserializeObject<ChartJs>(chartData) ?? new ChartJs();
+
+                Chart.data.datasets[0].data = new int[3];
+                
+                Chart.data.datasets[0].data[0] = data[0].VATProcessed > 0 ? Convert.ToInt32(data[0].VATProcessed) : 0;
+                Chart.data.datasets[0].data[1] = data[0].VATPending > 0 ? Convert.ToInt32(data[0].VATPending) : 0;
+                Chart.data.datasets[0].data[2] = data[0].CountProcessed > 0 ? Convert.ToInt32(data[0].CountProcessed) : 0;
+
+                VatProcChartJson = JsonConvert.SerializeObject(Chart, new JsonSerializerSettings
+                {
+                    NullValueHandling = NullValueHandling.Ignore,
+                });
+
+
+                chartData = @"{
+                type: 'pie',
+                responsive: true
+                ,data:
+                {
+                    labels: ['B2B', 'B2C'],
+                    datasets: [{
+                        label: 'VAT',
+                        data: [],
+                        backgroundColor: [
+                        'rgba(255, 195, 109, 1)',
+                        'rgba(121, 106, 238, 1)',
+                            ],
+                        borderColor: [
+                        'rgba(255, 195, 109, 0.7)',
+                        'rgba(121, 106, 238, 0.7)',
+                            ],
+                        borderWidth: 1
+                    }]
+                },
+                options:
+                {
+                    scales:
+                    {
+                        yAxes: [{
+                            ticks:
+                            {
+                                beginAtZero: true
+                            }
+                        }]
+                    }
+                }
+            }";
+
+                Chart = JsonConvert.DeserializeObject<ChartJs>(chartData) ?? new ChartJs();
+
+                Chart.data.datasets[0].data = new int[2];
+
+                Chart.data.datasets[0].data[0] = data[0].VatB2B > 0 ? Convert.ToInt32(data[0].VatB2B) : 0;
+                Chart.data.datasets[0].data[1] = data[0].VatB2C > 0 ? Convert.ToInt32(data[0].VatB2C) : 0;
+
+                VatB2BChartJson = JsonConvert.SerializeObject(Chart, new JsonSerializerSettings
+                {
+                    NullValueHandling = NullValueHandling.Ignore,
+                });
             }
             catch (Exception ex)
             {
                 new Basepage().logWrite(ex.ToString(), LOGTYPE.LG);
+                return false;
             }
-            return chartData;
+            return true;
         }
     }
 }
