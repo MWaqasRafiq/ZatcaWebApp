@@ -49,7 +49,7 @@ namespace ZatcaWebApp_V2.Pages
         }
         public async Task LoadVATDDL(bool enableAll)
         {
-            enableAll = true;
+            //enableAll = true;
             VatNo = new List<SelectListItem>();
             if (enableAll)
                 VatNo.Add(new SelectListItem("ALL", "ALL"));

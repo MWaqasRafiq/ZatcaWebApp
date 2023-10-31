@@ -52,17 +52,15 @@
                         <!-- Navbar Menu -->
                         <ul class="nav-menu list-unstyled d-flex flex-md-row align-items-md-center">
                             <!-- Search-->
-                            <li class="nav-item d-flex align-items-center">
+                            <li class="nav-item d-flex align-items-center d-none">
                                 <a id="search" href="#">
-                                    <svg class="svg-icon svg-icon-xs svg-icon-heavy">
-                                        <use xlink:href="#find-1"> </use>
-                                    </svg>
                                 </a>
                             </li>
 
                             <!-- Languages dropdown    -->
                             <li class="nav-item dropdown">
-                                <a class="nav-link text-white dropdown-toggle d-flex align-items-center" id="languages" href="#" data-bs-toggle="dropdown" aria-expanded="false"><span class="d-none d-sm-inline-block">Settings</span></a>
+                                <a class="nav-link text-white dropdown-toggle d-flex align-items-center" id="languages" href="#" data-bs-toggle="dropdown" aria-expanded="false">
+                                    <span class="d-none d-sm-inline-block">Settings</span></a>
                                 <ul class="dropdown-menu dropdown-menu-end mt-3 shadow-sm" aria-labelledby="languages">
                                     <li><a class="dropdown-item" rel="nofollow" href="#"> <span class="text-xs text-gray-700">Create User</span></a></li>
                                     <li><a class="dropdown-item" rel="nofollow" href="#"> <span class="text-xs text-gray-700">Reset Password                                         </span></a></li>
@@ -70,7 +68,7 @@
                             </li>
                             <!-- Logout    -->
                             <li class="nav-item">
-                                <a class="nav-link text-white" href="login.html">
+                                <a class="nav-link text-white" asp-page="/Login">
                                     <span class="d-none d-sm-inline">Logout</span>
                                     <svg class="svg-icon svg-icon-xs svg-icon-heavy">
                                         <use xlink:href="#security-1"> </use>
