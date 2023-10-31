@@ -22,6 +22,7 @@ namespace ZatcaWebApp_V2.DataModel
             _context = context;
             ConStr = _configuration.GetConnectionString("ConStr") ?? "";
         }
+        
         public async Task<DataTable> getDataDBQuery(string query)
         {
             System.Data.DataTable dt = new System.Data.DataTable();
@@ -82,6 +83,7 @@ namespace ZatcaWebApp_V2.DataModel
             }
             return entity;
         }
+        
         public async Task<T> ExecuteSingleStoredProcedure<T>(string storedProcedure, List<SqlParameter> parameters, string ConnectionString, bool IsProcedure = true) where T : new()
         {
             T entity = new T();
@@ -173,6 +175,7 @@ namespace ZatcaWebApp_V2.DataModel
             }
             return new List<T>();
         }
+
         private T DataReaderMapToModel<T>(DbDataReader dr) where T : new()
         {
             T list = new T();

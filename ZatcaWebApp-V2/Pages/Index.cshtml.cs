@@ -41,12 +41,14 @@ namespace ZatcaWebApp_V2.Pages
             LoadVATChartData("").GetAwaiter().GetResult();
             return Page();
         }
+        
         public async Task<IActionResult> OnPostAsync()
         {
             LoadVATDDL(false).GetAwaiter().GetResult();
             LoadVATChartData(ConnectionString).GetAwaiter().GetResult();
             return Page();
         }
+        
         public async Task LoadVATDDL(bool enableAll)
         {
             //enableAll = true;
@@ -226,7 +228,6 @@ namespace ZatcaWebApp_V2.Pages
             return true;
         }
 
-
         public IActionResult OnPostddlVAT_Changed([FromBody] string ConnectionString)
         {
             try
@@ -238,6 +239,7 @@ namespace ZatcaWebApp_V2.Pages
             }
                 return new JsonResult("Hello " + ConnectionString);
         }
+        
         public IActionResult OnPostGetAjax(string name)
         {
             return new JsonResult("Hello " + name);
