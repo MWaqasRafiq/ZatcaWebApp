@@ -19,10 +19,6 @@
   </ItemGroup>
 
   <ItemGroup>
-    <ProjectReference Include="..\ZatcaWebApp\ZatcaWebApp.csproj" />
-  </ItemGroup>
-
-  <ItemGroup>
     <Reference Include="Newtonsoft.Json">
       <HintPath>C:\Program Files\IIS\Microsoft Web Deploy V3\Newtonsoft.Json.dll</HintPath>
     </Reference>

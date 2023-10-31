@@ -2,9 +2,25 @@
 @model IndexModel
 @{
     ViewData["Title"] = "Home page";
+
+    int submittedProgress = Convert.ToInt32(Model.dashboardChartData.TotalVatSubmitted / 
+                            (Model.dashboardChartData.TotalVatSubmitted + 
+                            Model.dashboardChartData.TotalVatFailed) * 100);
+
+    int failedProgress = Convert.ToInt32(Model.dashboardChartData.TotalVatFailed /
+                            (Model.dashboardChartData.TotalVatSubmitted +
+                            Model.dashboardChartData.TotalVatFailed) * 100);
+
+    int processedProgress = Convert.ToInt32(Model.dashboardChartData.VATProcessed /
+                            (Model.dashboardChartData.VATProcessed +
+                            Model.dashboardChartData.VATPending) * 100);
+
+    int b2BProgress = Convert.ToInt32(Model.dashboardChartData.VatB2B /
+                            (Model.dashboardChartData.VatB2B +
+                            Model.dashboardChartData.VatB2C) * 100);
 }
 
-<section class="pb-0">
+<section class="pb-0 pt-4">
     <div class="container-fluid">
         <div class="card mb-0">
             <div class="card-body">
@@ -18,12 +34,12 @@
                                 </svg>
                             </div>
                             <div class="mx-3">
-                                <h6 class="h4 fw-light text-gray-600 mb-3">New<br>Clients</h6>
+                                <h6 class="h4 fw-light text-gray-600 mb-3">VAT<br>Submitted</h6>
                                 <div class="progress" style="height: 4px">
-                                    <div class="progress-bar bg-violet" role="progressbar" style="width: 25%; height: 4px;" aria-valuenow="25" aria-valuemin="0" aria-valuemax="100"></div>
+                                    <div class="progress-bar bg-violet" role="progressbar" style="width: @(submittedProgress.ToString())%; height: 4px;" aria-valuenow="@(submittedProgress.ToString())" aria-valuemin="0" aria-valuemax="100"></div>
                                 </div>
                             </div>
-                            <div class="number"><strong class="text-lg">25</strong></div>
+                            <div class="number"><strong class="text-lg">@Convert.ToInt32(Model.dashboardChartData.TotalVatSubmitted)</strong></div>
                         </div>
                     </div>
                     <!-- Item -->
@@ -35,12 +51,12 @@
                                 </svg>
                             </div>
                             <div class="mx-3">
-                                <h6 class="h4 fw-light text-gray-600 mb-3">Work<br>Orders</h6>
+                                <h6 class="h4 fw-light text-gray-600 mb-3">VAT<br>Failed</h6>
                                 <div class="progress" style="height: 4px">
-                                    <div class="progress-bar bg-red" role="progressbar" style="width: 70%; height: 4px;" aria-valuenow="70" aria-valuemin="0" aria-valuemax="100"></div>
+                                    <div class="progress-bar bg-red" role="progressbar" style="width: @(failedProgress.ToString())%; height: 5px;" aria-valuenow="@(failedProgress.ToString())" aria-valuemin="0" aria-valuemax="100"></div>
                                 </div>
                             </div>
-                            <div class="number"><strong class="text-lg">70</strong></div>
+                            <div class="number"><strong class="text-lg">@Convert.ToInt32(Model.dashboardChartData.TotalVatFailed)</strong></div>
                         </div>
                     </div>
                     <!-- Item -->
@@ -52,12 +68,12 @@
                                 </svg>
                             </div>
                             <div class="mx-3">
-                                <h6 class="h4 fw-light text-gray-600 mb-3">New<br>Invoices</h6>
+                                <h6 class="h4 fw-light text-gray-600 mb-3">VAT<br>Processed</h6>
                                 <div class="progress" style="height: 4px">
-                                    <div class="progress-bar bg-green" role="progressbar" style="width: 40%; height: 4px;" aria-valuenow="40" aria-valuemin="0" aria-valuemax="100"></div>
+                                    <div class="progress-bar bg-green" role="progressbar" style="width: @(processedProgress.ToString())%; height: 5px;" aria-valuenow="@(processedProgress.ToString())" aria-valuemin="0" aria-valuemax="100"></div>
                                 </div>
                             </div>
-                            <div class="number"><strong class="text-lg">40</strong></div>
+                            <div class="number"><strong class="text-lg">@Convert.ToInt32(Model.dashboardChartData.VATProcessed)</strong></div>
                         </div>
                     </div>
                     <!-- Item -->
@@ -69,12 +85,12 @@
                                 </svg>
                             </div>
                             <div class="mx-3">
-                                <h6 class="h4 fw-light text-gray-600 mb-3">Open<br>Cases</h6>
+                                <h6 class="h4 fw-light text-gray-600 mb-3">VAT<br>B2B</h6>
                                 <div class="progress" style="height: 4px">
-                                    <div class="progress-bar bg-orange" role="progressbar" style="width: 50%; height: 4px;" aria-valuenow="50" aria-valuemin="0" aria-valuemax="100"></div>
+                                    <div class="progress-bar bg-orange" role="progressbar" style="width: @(b2BProgress.ToString())%; height: 5px;" aria-valuenow="@(b2BProgress.ToString())" aria-valuemin="0" aria-valuemax="100"></div>
                                 </div>
                             </div>
-                            <div class="number"><strong class="text-lg">50</strong></div>
+                            <div class="number"><strong class="text-lg">@Convert.ToInt32(Model.dashboardChartData.VatB2B)</strong></div>
                         </div>
                     </div>
                 </div>
@@ -82,7 +98,31 @@
         </div>
     </div>
 </section>
-<section class="charts">
+<section class="pb-0 pt-2">
+    <div class="container-fluid align-items-right">
+        <div class="row">
+            <div class="col-lg-6"> </div>
+            <div class="col-lg-2" style="text-align:right; font-weight:600">
+                <label class="pt-2" for="ddlVAT">VAT No:</label>
+                </div>
+            <div class="col-lg-4">
+          @*       @Html.DropDownList("Dropwonlist", (IEnumerable<SelectListItem>)Model.VatNo, 
+                new { @class = "form-control",id="ddlVAT" }) *@
+                <form asp-page="/Index" method="post" id="dropDownForm" onchange="ddlVAT_Changed()">
+                    <select class="form-select" id="ddlVAT" asp-for="ConnectionString">
+                        @{
+                            foreach (var i in Model.VatNo)
+                            {
+                                <option value="@i.Value">@i.Text</option>
+                            }
+                        }
+                    </select>
+                </form>
+            </div>
+        </div>
+    </div>
+</section>
+<section class="charts pt-2">
     <div class="container-fluid">
         <div class="row gy-4 align-items-stretch">
             <!-- Pie Chart 1 -->
@@ -131,7 +171,7 @@
                     </div>
                 </div>
             </div>
-
+          
             <!-- Pie Chart 3 -->
             <div class="col-lg-4">
                 <div class="card mb-0">
@@ -158,12 +198,14 @@
         </div>
     </div>
 </section>
-
+@* 
 <script src="~/lib/jquery/dist/jquery.min.js"></script>
-<script src="~/lib/jquery/dist/jquery.js"></script>
+<script src="~/lib/jquery/dist/jquery.js"></script> *@
 
 <script>
     document.addEventListener('DOMContentLoaded', (event) => {
+        $('ul#ZatcaSideMenu li:first').addClass("active");
+        $('#PageheadGeneral').text('Dashboard');
         debugger;
         // setTimeout(2000);
         var pieChartTotalVat = document.getElementById('pieChartTotalVat');
@@ -173,5 +215,27 @@
         var myVatChart = new Chart(pieChartVat, @Html.Raw(Model.VatProcChartJson) );
         var pieB2BChart = new Chart(pieChartB2B, @Html.Raw(Model.VatB2BChartJson) );
     });
- 
+    function ddlVAT_Changed() {
+        $('form').submit();
+    }
 </script>
+@* <script>
+    function ddlVAT_Changed(conn) {
+        debugger;
+        $.ajax({
+            type: "POST",
+            url: "/Index?handler=ddlVAT_Changed",
+            contentType: "application/json; charset=utf-8",
+            dataType: "json",
+            data: { "ConnectionString": conn },
+            // contentType: 'application/json',//'application/x-www-form-urlencoded',
+          
+            success: function (msg) {
+                console.log(msg);
+            },
+            error: function (err) {
+                console.log(err);
+            }
+        });
+    }
+</script> *@

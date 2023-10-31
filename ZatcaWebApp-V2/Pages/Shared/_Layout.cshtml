@@ -87,8 +87,8 @@
             <nav class="side-navbar z-index-40">
 
                 <!-- Sidebar Navidation Menus--><span class="text-uppercase text-gray-400 text-xs letter-spacing-0 mx-3 px-2 heading"></span>
-                <ul class="list-unstyled py-4">
-                    <li class="sidebar-item active">
+                <ul class="list-unstyled py-4" id="ZatcaSideMenu">
+                    <li class="sidebar-item">
                         <a class="sidebar-link" asp-area="" asp-page="/Index">
                             <svg class="svg-icon svg-icon-sm svg-icon-heavy me-xl-2">
                                 <use xlink:href="#real-estate-1"> </use>
@@ -96,14 +96,14 @@
                         </a>
                     </li>
                     <li class="sidebar-item">
-                        <a class="sidebar-link" href="tables.html">
+                        <a class="sidebar-link" asp-area="" asp-page="/Tables">
                             <svg class="svg-icon svg-icon-sm svg-icon-heavy me-xl-2">
                                 <use xlink:href="#portfolio-grid-1"> </use>
                             </svg>Tables
                         </a>
                     </li>
                     <li class="sidebar-item">
-                        <a class="sidebar-link" href="charts.html">
+                        <a class="sidebar-link" asp-area="" asp-page="/Charts">
                             <svg class="svg-icon svg-icon-sm svg-icon-heavy me-xl-2">
                                 <use xlink:href="#sales-up-1"> </use>
                             </svg>Charts
@@ -120,25 +120,25 @@
                         <a class="sidebar-link" href="#exampledropdownDropdown" data-bs-toggle="collapse">
                             <svg class="svg-icon svg-icon-sm svg-icon-heavy me-xl-2">
                                 <use xlink:href="#browser-window-1"> </use>
-                            </svg>Example dropdown
+                            </svg>Dropdown
                         </a>
                         <ul class="collapse list-unstyled " id="exampledropdownDropdown">
-                            <li><a class="sidebar-link" href="#">Page</a></li>
-                            <li><a class="sidebar-link" href="#">Page</a></li>
-                            <li><a class="sidebar-link" href="#">Page</a></li>
+                            <li><a class="sidebar-link" href="#">Page 1</a></li>
+                            <li><a class="sidebar-link" href="#">Page 2</a></li>
+                            <li><a class="sidebar-link" href="#">Page 3</a></li>
                         </ul>
                     </li>
                     <li class="sidebar-item">
-                        <a class="sidebar-link" href="login.html">
+                        <a class="sidebar-link" asp-page="/Login">
                             <svg class="svg-icon svg-icon-sm svg-icon-heavy me-xl-2">
                                 <use xlink:href="#disable-1"> </use>
                             </svg>Login page
                         </a>
                     </li>
-                </ul><span class="text-uppercase text-gray-400 text-xs letter-spacing-0 mx-3 px-2 heading">Extras</span>
+                @* </ul><span class="text-uppercase text-gray-400 text-xs letter-spacing-0 mx-3 px-2 heading">Extras</span>
                 <ul class="list-unstyled py-4">
                     <li class="sidebar-item">
-                        <a class="sidebar-link" href="#">
+                        <a class="sidebar-link" asp-area="" asp-page="/Login">
                             <svg class="svg-icon svg-icon-sm svg-icon-heavy me-xl-2">
                                 <use xlink:href="#imac-screen-1"> </use>
                             </svg>Demo
@@ -165,7 +165,7 @@
                             </svg>Demo
                         </a>
                     </li>
-                </ul>
+                </ul> *@
             </nav>
             <div class="content-inner w-100">
                 <!-- Page Header-->
@@ -205,6 +205,9 @@
     @* <script src="~/js/charts-custom.js"></script> *@
     <!-- Main File-->
     <script src="~/js/front.js"></script>
+
+    <script src="~/lib/jquery/dist/jquery.min.js"></script>
+    <script src="~/lib/jquery/dist/jquery.js"></script>
     <script>
         function injectSvgSprite(path) {
             var ajax = new XMLHttpRequest();
@@ -219,6 +222,7 @@
         }
 
         injectSvgSprite('https://bootstraptemple.com/files/icons/orion-svg-sprite.svg');
+
     </script>
     <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.7.1/css/all.css" integrity="sha384-fnmOCqbTlWIlj8LyTjo7mOUStjsKC4pOpQbqyi7RrhN7udi9RwhKkMHpvLbHG9Sr" crossorigin="anonymous">
 </body>

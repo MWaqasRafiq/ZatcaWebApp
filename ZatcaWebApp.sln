@@ -5,7 +5,7 @@ VisualStudioVersion = 17.7.34031.279
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ZatcaWebApp", "ZatcaWebApp\ZatcaWebApp.csproj", "{72A8F597-A39C-41E6-9D5C-FB44B823A75A}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ZatcaWebApp-V2", "ZatcaWebApp-V2\ZatcaWebApp-V2.csproj", "{17B3096C-779A-49F6-A579-48BACD28982F}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "ZatcaWebApp-V2", "ZatcaWebApp-V2\ZatcaWebApp-V2.csproj", "{17B3096C-779A-49F6-A579-48BACD28982F}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution

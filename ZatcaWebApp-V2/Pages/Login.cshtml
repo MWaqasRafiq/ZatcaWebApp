@@ -1,0 +1,54 @@
+﻿@page
+@model LoginModel
+@{
+    ViewData["Title"] = "Login";
+    Layout = "_LayoutMinified";
+}
+<div class="login-page">
+    <div class="container d-flex align-items-center position-relative py-5">
+        <div class="card shadow-sm w-100 rounded overflow-hidden bg-none">
+            <div class="card-body p-0">
+                <div class="row gx-0 align-items-stretch">
+                    <!-- Logo & Information Panel-->
+                    <div class="col-lg-6">
+                        <div class="info d-flex justify-content-center flex-column p-4 h-100">
+                            <div class="py-5">
+                                <h1 class="display-6 fw-bold">ZATCA</h1>
+                                <p class="fw-light mb-0">Login here to start your session</p>
+                            </div>
+                        </div>
+                    </div>
+                    <!-- Form Panel    -->
+                    <div class="col-lg-6 bg-white">
+                        <div class="d-flex align-items-center px-4 px-lg-5 h-100">
+                            <form class="login-form py-5 w-100" method="get" asp-page="/Index">
+                                <div class="input-material-group mb-3">
+                                    <input class="input-material" id="login-username" type="text" name="loginUsername" autocomplete="off" required data-validate-field="loginUsername">
+                                    <label class="label-material" for="login-username">User Name</label>
+                                </div>
+                                <div class="input-material-group mb-4">
+                                    <input class="input-material" id="login-password" type="password" name="loginPassword" required data-validate-field="loginPassword">
+                                    <label class="label-material" for="login-password">Password</label>
+                                </div>
+                                <div class="w-100" style="text-align:center">
+                                    <button class="btn btn-primary mb-3 mt-3 p-5 pt-3 pb-3 " id="login" type="submit">Login</button>
+                                </div>
+                                <br>
+                                @* <a class="text-sm text-paleBlue" href="#">Forgot Password?</a> *@
+                                @* <br>
+                                <br> *@
+                                
+                            </form>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="text-center position-absolute bottom-0 start-0 w-100 z-index-20">
+        <p class="text-white">
+            POWERED BY <a class="external" href="http://idol-mea.com">IDOL</a>
+            <!-- Please do not remove the backlink to us unless you support further theme's development at https://bootstrapious.com/donate. It is part of the license conditions. Thank you for understanding :)-->
+        </p>
+    </div>
+</div>
