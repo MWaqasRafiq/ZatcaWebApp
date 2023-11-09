@@ -8,6 +8,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
     @* <meta name="viewport" content="width=device-width, initial-scale=1.0" /> *@
     <meta name="robots" content="all,follow">
+
     <!-- Google fonts - Poppins -->
     <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Poppins:300,400,700">
     <!-- Choices CSS-->
@@ -19,9 +20,21 @@
     <!-- Favicon-->
     <link rel="shortcut icon" href="~/img/favicon.ico">
 
- @*    <link rel="stylesheet" href="~/lib/bootstrap/dist/css/bootstrap.min.css" />
-    <link rel="stylesheet" href="~/css/site.css" asp-append-version="true" />
+    <link href="https://code.jquery.com/ui/1.12.1/themes/ui-lightness/jquery-ui.css" rel="stylesheet" />
+    <link rel="stylesheet" href="~/lib/bootstrap/dist/css/bootstrap.css" />
+    <link rel="stylesheet" href="~/lib/font-awesome/css/font-awesome.min.css">
+    <link href="https://cdn.datatables.net/1.13.6/css/jquery.dataTables.min.css" rel="stylesheet" />
+    @* <link href="//netdna.bootstrapcdn.com/bootstrap/3.3.0/css/bootstrap-glyphicons.css" rel="stylesheet"> *@
+
+    @*    <link rel="stylesheet" href="~/css/site.css" asp-append-version="true" />
     <link rel="stylesheet" href="~/ZatcaWebApp_V2.styles.css" asp-append-version="true" /> *@
+
+    <style>
+        .control-label {
+            font-size: small;
+            color: #c4c4c4;
+        }
+    </style>
 </head>
 <body>
     <div class="page">
@@ -118,12 +131,12 @@
                         <a class="sidebar-link" href="#exampledropdownDropdown" data-bs-toggle="collapse">
                             <svg class="svg-icon svg-icon-sm svg-icon-heavy me-xl-2">
                                 <use xlink:href="#browser-window-1"> </use>
-                            </svg>Dropdown
+                            </svg>Reports
                         </a>
                         <ul class="collapse list-unstyled " id="exampledropdownDropdown">
-                            <li><a class="sidebar-link" href="#">Page 1</a></li>
-                            <li><a class="sidebar-link" href="#">Page 2</a></li>
-                            <li><a class="sidebar-link" href="#">Page 3</a></li>
+                            <li><a class="sidebar-link" asp-area="" asp-page="/Invoices">Invoices</a></li>
+                            <li><a class="sidebar-link" href="#">Invoice Details</a></li>
+                            <li><a class="sidebar-link" href="#">Invoice Counter</a></li>
                         </ul>
                     </li>
                     <li class="sidebar-item">
@@ -194,8 +207,8 @@
         @* <img src="~/img/orion-svg-sprite.svg" id="svgImgPath" style="display:none"> *@
     </div>
     <!-- JavaScript files-->
-    <script src="~/vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
     @* <script src="~/vendor/chart.js/Chart.min.js"></script> *@
+    <script src="~/vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.7.2/Chart.bundle.min.js"></script>
     <script src="~/vendor/just-validate/js/just-validate.min.js"></script>
     <script src="~/vendor/choices.js/public/assets/scripts/choices.min.js"></script>
@@ -204,8 +217,24 @@
     <!-- Main File-->
     <script src="~/js/front.js"></script>
 
-    <script src="~/lib/jquery/dist/jquery.min.js"></script>
-    <script src="~/lib/jquery/dist/jquery.js"></script>
+    <script src="https://code.jquery.com/ui/1.13.2/jquery-ui.js"></script>
+    <script src="https://ajax.googleapis.com/ajax/libs/jqueryui/1.12.1/jquery-ui.min.js">  </script>
+
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"
+            integrity="sha256-/xUj+3OJU5yExlq6GSYGSHk7tPXikynS7ogEvDej/m4="
+            crossorigin="anonymous"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jqueryui/1.12.1/jquery-ui.min.js"
+            integrity="sha512-uto9mlQzrs59VwILcLiRYeLKPPbS/bT71da/OEBYEwcdNUk8jYIy+D176RYoop1Da+f9mvkYrmj5MCLZWEtQuA=="
+            crossorigin="anonymous"
+            referrerpolicy="no-referrer"></script>
+
+    <script src="https://cdn.datatables.net/1.13.6/js/jquery.dataTables.min.js"></script>
+    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.7.1/css/all.css" integrity="sha384-fnmOCqbTlWIlj8LyTjo7mOUStjsKC4pOpQbqyi7RrhN7udi9RwhKkMHpvLbHG9Sr" crossorigin="anonymous">
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.6.2/dist/js/bootstrap.min.js" integrity="sha384-+sLIOodYLS7CIrQpBjl+C7nPvqq+FbNUBDunl/OZv93DB7Ln/533i8e/mZXLi/P+" crossorigin="anonymous"></script>
+    @* <script type="text/javascript" src='https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/3.0.3/js/bootstrap.min.js'></script> *@
+    @* <script src="~/lib/jquery/dist/jquery.js"></script> *@
+    @* <script src="~/lib/jquery/dist/jquery.min.js"></script> *@
+
     <script>
         function injectSvgSprite(path) {
             var ajax = new XMLHttpRequest();
@@ -220,48 +249,8 @@
         }
 
         injectSvgSprite('https://bootstraptemple.com/files/icons/orion-svg-sprite.svg');
-
+        $('#toggle-btn').removeclass('active');
     </script>
-    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.7.1/css/all.css" integrity="sha384-fnmOCqbTlWIlj8LyTjo7mOUStjsKC4pOpQbqyi7RrhN7udi9RwhKkMHpvLbHG9Sr" crossorigin="anonymous">
 </body>
-@* <body>
-    <header>
-        <nav class="navbar navbar-expand-sm navbar-toggleable-sm navbar-light bg-white border-bottom box-shadow mb-3">
-            <div class="container">
-                <a class="navbar-brand" asp-area="" asp-page="/Index">ZATCA</a>
-                <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target=".navbar-collapse" aria-controls="navbarSupportedContent"
-                        aria-expanded="false" aria-label="Toggle navigation">
-                    <span class="navbar-toggler-icon"></span>
-                </button>
-                <div class="navbar-collapse collapse d-sm-inline-flex justify-content-between">
-                    <ul class="navbar-nav flex-grow-1">
-                        <li class="nav-item">
-                            <a class="nav-link text-dark" asp-area="" asp-page="/Index">Home</a>
-                        </li>
-                        <li class="nav-item">
-                            <a class="nav-link text-dark" asp-area="" asp-page="/Privacy">Privacy</a>
-                        </li>
-                    </ul>
-                </div>
-            </div>
-        </nav>
-    </header>
-    <div class="container">
-        <main role="main" class="pb-3">
-            @RenderBody()
-        </main>
-    </div>
 
-    <footer class="border-top footer text-muted">
-        <div class="container">
-            &copy; 2023 - ZatcaWebApp_V2 - <a asp-area="" asp-page="/Privacy">Privacy</a>
-        </div>
-    </footer>
-
-    <script src="~/lib/jquery/dist/jquery.min.js"></script>
-    <script src="~/lib/bootstrap/dist/js/bootstrap.bundle.min.js"></script>
-    <script src="~/js/site.js" asp-append-version="true"></script>
-
-    @await RenderSectionAsync("Scripts", required: false)
-</body> *@
 </html>

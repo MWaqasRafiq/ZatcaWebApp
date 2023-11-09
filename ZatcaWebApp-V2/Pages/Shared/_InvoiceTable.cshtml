@@ -1,0 +1,67 @@
+﻿@using System.Data;
+@using ZatcaWebApp_V2.ViewModel;
+@model InvoicesViewModel
+@{
+    List<string> listOfColumns = new List<string>();
+}
+
+<div class="container-fluid" >
+    <div class="row gy-4">
+        <div class="col-lg-12">
+            <div class="card mb-0">
+                @*    <div class="card-header">
+                <div class="card-close">
+                <div class="dropdown">
+                <button class="dropdown-toggle text-sm" type="button" id="closeCard1" data-bs-toggle="dropdown" aria-expanded="false"><i class="fas fa-ellipsis-v"></i></button>
+                <div class="dropdown-menu dropdown-menu-end shadow-sm" aria-labelledby="closeCard1"><a class="dropdown-item py-1 px-3 remove" href="#"> <i class="fas fa-times"></i>Close</a><a class="dropdown-item py-1 px-3 edit" href="#"> <i class="fas fa-cog"></i>Edit</a></div>
+                </div>
+                </div>
+                <h3 class="h4 mb-0">Striped table with hover effect</h3>
+                </div> *@
+                <div class="card-body">
+                    <div class="table-responsive" style="max-height: 90vh;">
+                        <table class="table mb-0 table-striped table-hover w-100" style="margin-right:100px" id="invoiceTable">
+                            <thead>
+                                <tr>
+                                    @foreach (DataColumn column in Model.InvoiceTable.Columns)
+                                    {
+                                        <th>@column.ColumnName</th>
+                                        listOfColumns.Add(column.ColumnName);
+                                    }
+                                </tr>
+                            </thead>
+                            <tbody>
+
+                                @foreach (DataRow row in Model.InvoiceTable.Rows)
+                                {
+                                    <tr>
+
+                                        @foreach (string col in listOfColumns)
+                                        {
+                                            <td>@row[col].ToString()</td>
+                                        }
+                                    </tr>
+                                }
+                            </tbody>
+                            <tfoot>
+                                <tr>
+                                    @foreach (DataColumn column in Model.InvoiceTable.Columns)
+                                    {
+                                        <th>@column.ColumnName</th>
+                                    }
+                                </tr>
+                            </tfoot>
+                        </table>
+
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<script>
+    new DataTable('#invoiceTable', {
+        pagingType: 'full_numbers'
+    });
+</script>

@@ -1,0 +1,153 @@
+﻿@page
+@using System.Data;
+@model ZatcaWebApp_V2.Pages.InvoicesModel
+@{
+    ViewData["Title"] = "Invoice Report";
+    Layout = "_Layout";
+}
+@Html.AntiForgeryToken()
+@* <partial name="~/Pages/Shared/_InvoiceTable.cshtml" /> *@
+
+<div class="overflow-auto pb-0 pt-0 w-100" style="padding-right: 6rem;">
+    <section class="pb-2 pt-3">
+        <div style="text-align:right" class="container-fluid">
+            <button type="button" id="btn_filters" class="btn btn-info" data-toggle="collapse" data-target="#demo">Filters</button>
+            <div id="demo" class="collapse card mb-0 mt-2" style="text-align:left">
+                <div class="card-body">
+                    <div class="row">
+                        <div class="col-lg-3">
+                            <div class="form-group">
+                                <label class="control-label" for="ddlVAT">VAT No</label>
+                                @Html.DropDownList("Dropwonlist", (IEnumerable<SelectListItem>)Model.VatNo,
+                                new { @class = "form-control input-sm",id="ddlVAT"})
+                            </div>
+                        </div>
+                        <div class="col-lg-3">
+                            <div class="form-group">
+                                <label class="control-label" for="FromDate">From Date</label>
+                                <div class="input-group">
+                                    <input id="FromDate" placeholder="DD/MM/YYYY" asp-for="invoicesVM.FromDate" type="text" class="datePicker form-control">
+                                    <div class="input-group-append">
+                                        <label class="input-group-text" for="FromDate">
+                                            <i class="fa fa-calendar" style="font-size: x-large;" aria-hidden="true"></i>
+                                        </label>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-lg-3">
+                            <div class="form-group">
+                                <label class="control-label" for="FromDate">To Date</label>
+                                <div class="input-group">
+                                    <input id="ToDate" placeholder="DD/MM/YYYY" asp-for="invoicesVM.ToDate" type="text" class="datePicker form-control">
+                                    <div class="input-group-append">
+                                        <label class="input-group-text" for="ToDate">
+                                            <i class="fa fa-calendar" style="font-size: x-large;" aria-hidden="true"></i>
+                                        </label>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-lg-3">
+                            <button type="button" class="btn btn-warning" id="sub_button">Submit</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+    <section class="tables pt-2" id="sectionForInvoice"></section>
+
+</div>
+
+@* <link href=’https://ajax.googleapis.com/ajax/libs/jqueryui/1.12.1/themes/ui-lightness/jquery-ui.css’ rel=’stylesheet’> *@
+@* <script src="~/lib/jquery/dist/jquery.js"></script> *@
+@* <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.6.2/dist/js/bootstrap.min.js" integrity="sha384-+sLIOodYLS7CIrQpBjl+C7nPvqq+FbNUBDunl/OZv93DB7Ln/533i8e/mZXLi/P+" crossorigin="anonymous"></script> *@
+@* <script src="~/lib/bootstrap/dist/js/bootstrap.js"></script> *@
+@* <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datepicker/1.10.0/css/bootstrap-datepicker.min.css" integrity="sha512-34s5cpvaNG3BknEWSuOncX28vz97bRI59UnVtEEpFX536A7BtZSJHsDyFoCl8S7Dt2TPzcrCEoHBGeM4SUBDBw==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+<script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datepicker/1.10.0/js/bootstrap-datepicker.min.js" integrity="sha512-LsnSViqQyaXpD4mBBdRYeP6sRwJiJveh2ZIbW41EBrNmKxgr/LFZIiWT6yr+nycvhvauz8c2nYMhrP80YhG7Cw==" crossorigin="anonymous" referrerpolicy="no-referrer"></script> *@
+
+@* <script src="https://code.jquery.com/ui/1.13.2/jquery-ui.js"></script> *@
+@* <script src="https://ajax.googleapis.com/ajax/libs/jqueryui/1.12.1/jquery-ui.min.js">  </script> *@
+<script src="https://code.jquery.com/jquery-3.6.0.min.js"
+        integrity="sha256-/xUj+3OJU5yExlq6GSYGSHk7tPXikynS7ogEvDej/m4="
+        crossorigin="anonymous"></script>
+<script>
+    $('ul#exampledropdownDropdown li:nth-child(1)').addClass("active");
+    $('#PageheadGeneral').text('Invoices');
+
+    $(document).ready(function () {
+
+        $(function () {
+            $(".datePicker").datepicker({
+                dateFormat: 'dd/mm/y',//check change
+                changeMonth: true,
+                changeYear: true
+            });
+        });
+        // new DataTable('#invoiceTable', {
+        //     pagingType: 'full_numbers'
+        // });
+
+        // $('#invoiceTable').DataTable({
+        //     processing: true,
+        //     serverSide: true,
+        //     searching: true,
+        //     ordering: true,
+        //     paging: true,
+        //     "ajax": {
+        //         "url": "Invoices/Products",
+        //         "type": "POST",
+        //         "datatype": "json"
+        //     },
+        //     columns: [
+        //         { "data": "productID", "name": "Product Id", "autoWidth": true },
+        //         { "data": "name", "name": "Product Name", "autoWidth": true },
+        //         { "data": "productNumber", "name": "Product Number", "autoWidth": true },
+        //         { "data": "color", "name": "Product Color", "autoWidth": true }
+        //     ]
+        // });
+        $("#sub_button").click(function () {
+            var invoices = {
+                // VatNo: $('#ddlVAT').val(),
+                FromDate: $('#FromDate').val(),
+                ToDate: $('#ToDate').val(),
+            };
+            var json = JSON.stringify(invoices);
+
+            debugger;
+            $.ajax({
+                type: "POST",
+                beforeSend: function (xhr) {
+                    xhr.setRequestHeader("XSRF-TOKEN",
+                        $('input:hidden[name="__RequestVerificationToken"]').val());
+                },
+                url: "/Invoices?handler=InvoicePartial",
+                data: invoices,
+                success: function (data) {
+                    console.log(data)
+                    $('#btn_filters').trigger('click');
+                    $("#sectionForInvoice").html(data);
+                }
+            });
+            // $.ajax({
+            //     type: "POST",
+            //     url: "/Invoices?handler=InvoicePartial",
+            //     data: invoices,
+            //     contentType: "application/json; charset=utf-8",
+            //     dataType: "json",
+            //     success: function (response) {
+            //         $("#sectionForInvoice").html(response);
+            //     },
+            //     failure: function (response) {
+            //         console.log(response.responseText);
+            //     },
+            //     error: function (response) {
+            //         console.log(response.responseText);
+            //     }
+            // });
+        });
+       
+    })
+  
+</script>

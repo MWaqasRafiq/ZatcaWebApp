@@ -20,7 +20,8 @@ namespace ZatcaWebApp_V2.Pages
         private readonly MasterPage _masterPage;
         private readonly ApplicationDBContext _context;
 
-        public IndexModel(ILogger<IndexModel> logger, IConfiguration configuration, ApplicationDBContext context)
+        public IndexModel(ILogger<IndexModel> logger, IConfiguration configuration,
+            ApplicationDBContext context)
         {
             _logger = logger;
             _configuration = configuration;
@@ -49,18 +50,25 @@ namespace ZatcaWebApp_V2.Pages
             return Page();
         }
         
-        public async Task LoadVATDDL(bool enableAll)
+        private async Task LoadVATDDL(bool enableAll)
         {
-            //enableAll = true;
-            VatNo = new List<SelectListItem>();
-            if (enableAll)
-                VatNo.Add(new SelectListItem("ALL", "ALL"));
+            try
+            {
+                //enableAll = true;
+                VatNo = new List<SelectListItem>();
+                if (enableAll)
+                    VatNo.Add(new SelectListItem("ALL", "ALL"));
 
-            var data = await _masterPage.ExecuteStoredProcedure<VatIdsVM>("select * from VATIDs where status=1", new List<SqlParameter>(), false);
+                var data = await _masterPage.ExecuteStoredProcedure<VatIdsVM>("select * from VATIDs where status=1", new List<SqlParameter>(), false);
 
-            var itemList = (from p in data
-                               select new SelectListItem { Value = p.ConnectionString, Text = p.VATNo.ToString() }).ToList<SelectListItem>();
-            VatNo.AddRange(itemList);
+                var itemList = (from p in data
+                                select new SelectListItem { Value = p.ConnectionString, Text = p.VATNo.ToString() }).ToList<SelectListItem>();
+                VatNo.AddRange(itemList);
+            }
+            catch (Exception ex)
+            {
+                _logger.LogError(ex,ex.Message);
+            }
         }
 
         public async Task<bool> LoadVATChartData(string ConnectionString)
