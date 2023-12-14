@@ -107,9 +107,9 @@
     <Reference Include="Newtonsoft.Json, Version=13.0.0.0, Culture=neutral, PublicKeyToken=30ad4fe6b2a6aeed, processorArchitecture=MSIL">
       <HintPath>..\packages\Newtonsoft.Json.13.0.3\lib\net45\Newtonsoft.Json.dll</HintPath>
     </Reference>
-    <Reference Include="QRCoder">
-      <HintPath>..\..\..\..\..\Downloads\QRCode_Demo\QRCode_Demo\QRCode_Demo\bin\QRCoder.dll</HintPath>
-    </Reference>
+   <Reference Include="QRCoder">
+  <HintPath>..\..\..\..\..\Downloads\QRCode_Demo\QRCode_Demo\QRCode_Demo\bin\QRCoder.dll</HintPath>
+</Reference>
     <Reference Include="RestSharp">
       <HintPath>..\..\GatewayServiceIDOL\GatewayService\bin\Debug\RestSharp.dll</HintPath>
     </Reference>
@@ -191,6 +191,7 @@
     <Reference Include="System.Configuration" />
     <Reference Include="System.Web.Services" />
     <Reference Include="System.EnterpriseServices" />
+    <Reference Include="WindowsBase" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="BranchInvReport.aspx" />
@@ -399,6 +400,7 @@
     <Compile Include="Onboard.aspx.designer.cs">
       <DependentUpon>Onboard.aspx</DependentUpon>
     </Compile>
+    <Compile Include="PDF_A3_Helper.cs" />
     <Compile Include="PDF_Helper.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Roles.aspx.cs">

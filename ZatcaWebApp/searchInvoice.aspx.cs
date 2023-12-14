@@ -267,8 +267,9 @@ namespace ZatcaWebApp
 
 
             //generate QR 
-            QRCodeGenerator qrGenerator = new QRCodeGenerator();
-            QRCodeGenerator.QRCode qrCode = qrGenerator.CreateQrCode(QR, QRCodeGenerator.ECCLevel.Q);
+            QRCodeGenerator QrGenerator = new QRCodeGenerator();
+            QRCodeData QrCodeInfo = QrGenerator.CreateQrCode(QR, QRCodeGenerator.ECCLevel.Q);
+            QRCoder.QRCode qrCode = new QRCoder.QRCode(QrCodeInfo);
 
             using (Bitmap bitMap = qrCode.GetGraphic(20))
             {
