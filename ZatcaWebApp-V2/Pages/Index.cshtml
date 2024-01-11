@@ -34,12 +34,12 @@
                                 </svg>
                             </div>
                             <div class="mx-3">
-                                <h6 class="h4 fw-light text-gray-600 mb-3">VAT<br>Submitted</h6>
+                                <h6 class="h4 fw-light text-gray-600 mb-1">VAT Submitted</h6>
+                                <div class="number mb-1"><strong class="text-lg">@Convert.ToInt32(Model.dashboardChartData.TotalVatSubmitted)</strong></div>
                                 <div class="progress" style="height: 4px" title="@(submittedProgress.ToString())%">
                                     <div class="progress-bar bg-violet" role="progressbar" style="width: @(submittedProgress.ToString())%; height: 4px;" aria-valuenow="@(submittedProgress.ToString())" aria-valuemin="0" aria-valuemax="100"></div>
                                 </div>
                             </div>
-                            <div class="number"><strong class="text-lg">@Convert.ToInt32(Model.dashboardChartData.TotalVatSubmitted)</strong></div>
                         </div>
                     </div>
                     <!-- Item -->
@@ -51,12 +51,12 @@
                                 </svg>
                             </div>
                             <div class="mx-3">
-                                <h6 class="h4 fw-light text-gray-600 mb-3">VAT<br>Failed</h6>
+                                <h6 class="h4 fw-light text-gray-600 mb-1">VAT >Failed</h6>
+                                <div class="number mb-1"><strong class="text-lg">@Convert.ToInt32(Model.dashboardChartData.TotalVatFailed)</strong></div>
                                 <div class="progress" style="height: 4px" title="@(failedProgress.ToString())%">
                                     <div class="progress-bar bg-red" role="progressbar" style="width: @(failedProgress.ToString())%; height: 5px;" aria-valuenow="@(failedProgress.ToString())" aria-valuemin="0" aria-valuemax="100"></div>
                                 </div>
                             </div>
-                            <div class="number"><strong class="text-lg">@Convert.ToInt32(Model.dashboardChartData.TotalVatFailed)</strong></div>
                         </div>
                     </div>
                     <!-- Item -->
@@ -68,12 +68,12 @@
                                 </svg>
                             </div>
                             <div class="mx-3">
-                                <h6 class="h4 fw-light text-gray-600 mb-3">VAT<br>Processed</h6>
+                                <h6 class="h4 fw-light text-gray-600 mb-1">VAT Processed</h6>
+                                <div class="number mb-1"><strong class="text-lg">@Convert.ToInt32(Model.dashboardChartData.VATProcessed)</strong></div>
                                 <div class="progress" style="height: 4px" title="@(processedProgress.ToString())%">
                                     <div class="progress-bar bg-green" role="progressbar" style="width: @(processedProgress.ToString())%; height: 5px;" aria-valuenow="@(processedProgress.ToString())" aria-valuemin="0" aria-valuemax="100"></div>
                                 </div>
                             </div>
-                            <div class="number"><strong class="text-lg">@Convert.ToInt32(Model.dashboardChartData.VATProcessed)</strong></div>
                         </div>
                     </div>
                     <!-- Item -->
@@ -85,12 +85,12 @@
                                 </svg>
                             </div>
                             <div class="mx-3">
-                                <h6 class="h4 fw-light text-gray-600 mb-3">VAT<br>B2B</h6>
+                                <h6 class="h4 fw-light text-gray-600 mb-1">VAT B2B</h6>
+                                <div class="number mb-1"><strong class="text-lg">@Convert.ToInt32(Model.dashboardChartData.VatB2B)</strong></div>
                                 <div class="progress" style="height: 4px" title="@(b2BProgress.ToString())%">
                                     <div class="progress-bar bg-orange" role="progressbar" style="width: @(b2BProgress.ToString())%; height: 5px;" aria-valuenow="@(b2BProgress.ToString())" aria-valuemin="0" aria-valuemax="100"></div>
                                 </div>
                             </div>
-                            <div class="number"><strong class="text-lg">@Convert.ToInt32(Model.dashboardChartData.VatB2B)</strong></div>
                         </div>
                     </div>
                 </div>

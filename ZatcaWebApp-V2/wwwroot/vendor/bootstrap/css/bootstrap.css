@@ -4975,7 +4975,7 @@ textarea.form-control-lg {
   color: var(--bs-progress-bar-color);
   text-align: center;
   white-space: nowrap;
-  background-color: var(--bs-progress-bar-bg);
+  /*background-color: var(--bs-progress-bar-bg);*/
   transition: var(--bs-progress-bar-transition);
 }
 @media (prefers-reduced-motion: reduce) {
