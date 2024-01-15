@@ -1,9 +1,9 @@
 ﻿@using System.Data;
 @using ZatcaWebApp_V2.ViewModel;
-@model InvoicesViewModel
+@* @model InvoicesViewModel
 @{
     List<string> listOfColumns = new List<string>();
-}
+} *@
 
 <div class="container-fluid" >
     <div class="row gy-4">
@@ -20,7 +20,7 @@
                 </div> *@
                 <div class="card-body">
                     <div class="table-responsive" style="max-height: 90vh;">
-                        <table class="table mb-0 table-striped table-hover w-100" style="margin-right:100px" id="invoiceTable">
+                      @*   <table class="table mb-0 table-striped table-hover w-100" style="margin-right:100px" id="invoiceTable">
                             <thead>
                                 <tr>
                                     @foreach (DataColumn column in Model.InvoiceTable.Columns)
@@ -51,7 +51,7 @@
                                     }
                                 </tr>
                             </tfoot>
-                        </table>
+                        </table> *@
 
                     </div>
                 </div>
@@ -60,8 +60,81 @@
     </div>
 </div>
 
-<script>
-    new DataTable('#invoiceTable', {
-        pagingType: 'full_numbers'
+@section Scripts {
+  @*   <script>
+        $(document).ready(function () {
+            $('#invoiceTable').DataTable({
+                "proccessing": true,
+                "serverSide": true,
+                "ajax": {
+                    url: "/Invoices",
+                    type: 'POST',
+                    headers: { 'RequestVerificationToken': $('@Html.AntiForgeryToken()').val() }
+                },
+                "columnDefs": [
+                    {
+                        "targets": -1,
+                        "data": null,
+                        "render": function (data, type, row, meta) {
+                            return '<a href="/customers/edit?id=' + row.id + '">Edit</a> | <a href="/customers/details?id=' + row.id + '">Details</a> | <a href="/customers/delete?id=' + row.id + '">Delete</a>';
+                        },
+                        "sortable": false
+                    },
+                    { "name": "Id", "data": "id", "targets": 0, "visible": false },
+                    { "name": "Name", "data": "name", "targets": 1 },
+                    { "name": "PhoneNumber", "data": "phoneNumber", "targets": 2 },
+                    { "name": "Address", "data": "address", "targets": 3 },
+                    { "name": "PostalCode", "data": "postalCode", "targets": 4 }
+                ],
+                "order": [[0, "desc"]]
+            });
+        });
+    </script>*@
+} 
+@* <script>
+    // new DataTable('#invoiceTable', {
+    //     pagingType: 'full_numbers'
+    // });
+    $(document).ready(function () {
+        // Setup - add a text input to each footer cell
+        $('#invoiceTable tfoot th').each(function () {
+            var title = $(this).text();
+            $(this).html('<input type="search" placeholder="Search ' + title + '" />');
+        });
+
+        new DataTable('#invoiceTable', {
+            initComplete: function () {
+                this.api()
+                    .columns()
+                    .every(function () {
+                        let column = this;
+                        let title = column.footer().textContent;
+
+                        // Create input element
+                        let input = document.createElement('input');
+                        input.placeholder = title;
+                        column.footer().replaceChildren(input);
+
+                        // Event listener for user input
+                        input.addEventListener('keyup', () => {
+                            if (column.search() !== this.value) {
+                                column.search(input.value).draw();
+                            }
+                        });
+                    });
+            }
+            ,
+            "search": {
+                "return": false
+            }, columnDefs: [
+                { targets: '_all', orderable: true },
+            ],
+            processing: true,
+            serverSide: true, 
+            ajax: {
+                url: 'Invoices/JsonInvoicePartial',
+                type: 'POST'
+            }
+        });
     });
-</script>
+</script> *@
