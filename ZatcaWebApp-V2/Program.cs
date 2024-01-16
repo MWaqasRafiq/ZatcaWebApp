@@ -1,6 +1,8 @@
 using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
 using ZatcaWebApp_V2.Common;
+using ZatcaWebApp_V2.DataModel.Repository;
+using ZatcaWebApp_V2.DataModel.Repository.Interface;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -11,6 +13,8 @@ var connectionString = builder.Configuration.GetConnectionString("ConStr") ?? th
 builder.Services.AddDbContext<ApplicationDBContext>(options =>
     options.UseSqlServer(connectionString));
 builder.Services.AddAntiforgery(o => o.HeaderName = "XSRF-TOKEN");
+
+builder.Services.AddTransient<IReportsRepository, ReportsRepository>();
 
 var app = builder.Build();
 

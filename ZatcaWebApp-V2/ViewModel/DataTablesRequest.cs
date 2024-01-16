@@ -2,44 +2,35 @@
 
 namespace ZatcaWebApp_V2.ViewModel
 {
-    public class DataTablesRequest
+    public class DataTableAjaxPostModel
     {
-        public int Draw { get; set; }
-
-        public List<Column> Columns { get; set; }
-
-        public List<Order> Order { get; set; }
-
-        public int Start { get; set; }
-
-        public int Length { get; set; }
-
-        public Search Search { get; set; }
+        // properties are not capital due to json mapping
+        public int draw { get; set; }
+        public int start { get; set; }
+        public int length { get; set; }
+        public Search search { get; set; }
+        public List<Order> order { get; set; }
+        public List<Column> columns { get; set; }
     }
+
     public class Column
     {
-        public string Data { get; set; }
-
-        public string Name { get; set; }
-
-        public bool Searchable { get; set; }
-
-        public bool Orderable { get; set; }
-
-        public Search Search { get; set; }
-    }
-
-    public class Order
-    {
-        public int Column { get; set; }
-
-        public string Dir { get; set; }
+        public string data { get; set; }
+        public string name { get; set; }
+        public bool searchable { get; set; }
+        public bool orderable { get; set; }
+        public Search search { get; set; }
     }
 
     public class Search
     {
-        public string Value { get; set; }
+        public string value { get; set; }
+        public string regex { get; set; }
+    }
 
-        public bool IsRegex { get; set; }
+    public class Order
+    {
+        public string dir { get; set; }
+        public int column { get; set; }
     }
 }

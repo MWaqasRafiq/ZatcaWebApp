@@ -4,14 +4,14 @@
 @{
     ViewData["Title"] = "Invoice Report";
     Layout = "_Layout";
-    List<string> listOfColumns = new List<string>();
+    // List<string> listOfColumns = new List<string>();
 }
 @Html.AntiForgeryToken()
 @* <partial name="~/Pages/Shared/_InvoiceTable.cshtml" /> *@
 
 <div class="overflow-auto pb-0 pt-0 w-100" style="padding-right: 6rem;">
-    <section class="pb-2 pt-3">
-        <div style="text-align:right" class="container-fluid">
+    <section class="pb-1 pt-1">
+        @* <div style="text-align:right" class="container-fluid">
             <button type="button" id="btn_filters" class="btn btn-info" data-toggle="collapse" data-target="#demo">Filters</button>
             <div id="demo" class="collapse card mb-0 mt-2" style="text-align:left">
                 <div class="card-body">
@@ -55,7 +55,7 @@
                     </div>
                 </div>
             </div>
-        </div>
+        </div> *@
     </section>
     @* <section class="tables pt-2" id="sectionForInvoice"></section> *@
 
@@ -64,14 +64,17 @@
             <div class="col-lg-12">
                 <div class="card mb-0">
                     <div class="card-body">
-                        <div class="table-responsive" style="max-height: 90vh;">
-                            <table class="table mb-0 table-striped table-hover w-100" style="margin-right:100px" id="InvoicesTable">
+                        <div class="table-responsive" @* style="max-height: 90vh;" *@>
+                            <table class="table mb-0 table-striped table-hover w-100 wrap" style="font-size: 12px;word-wrap: break-word; word-break: break-all;" id="InvoicesTable">
                                 <thead>
                                     <tr>
                                         @foreach (DataColumn column in Model.invoicesViewModel[0].Columns)
                                         {
-                                            <th>@column.ColumnName</th>
-                                            listOfColumns.Add(column.ColumnName);
+                                            if (@column.ColumnName.ToLower() != "totalrows")
+                                            {
+                                                <th>@column.ColumnName</th>
+                                                @* listOfColumns.Add(column.ColumnName); *@
+                                            }
                                         }
                                     </tr>
                                 </thead>
@@ -92,7 +95,10 @@
                                     <tr>
                                         @foreach (DataColumn column in Model.invoicesViewModel[0].Columns)
                                         {
-                                            <th>@column.ColumnName</th>
+                                            if (@column.ColumnName.ToLower() != "totalrows")
+                                            {
+                                                <th>@column.ColumnName</th>
+                                            }
                                         }
                                     </tr>
                                 </tfoot>
@@ -130,28 +136,7 @@
                 changeYear: true
             });
         });
-        // new DataTable('#invoiceTable', {
-        //     pagingType: 'full_numbers'
-        // });
-
-        // $('#invoiceTable').DataTable({
-        //     processing: true,
-        //     serverSide: true,
-        //     searching: true,
-        //     ordering: true,
-        //     paging: true,
-        //     "ajax": {
-        //         "url": "Invoices/Products",
-        //         "type": "POST",
-        //         "datatype": "json"
-        //     },
-        //     columns: [
-        //         { "data": "productID", "name": "Product Id", "autoWidth": true },
-        //         { "data": "name", "name": "Product Name", "autoWidth": true },
-        //         { "data": "productNumber", "name": "Product Number", "autoWidth": true },
-        //         { "data": "color", "name": "Product Color", "autoWidth": true }
-        //     ]
-        // });
+    
         $("#sub_button").click(function () {
             var invoices = {
                 // VatNo: $('#ddlVAT').val(),
@@ -175,34 +160,24 @@
                     $("#sectionForInvoice").html(data);
                 }
             });
-            // $.ajax({
-            //     type: "POST",
-            //     url: "/Invoices?handler=InvoicePartial",
-            //     data: invoices,
-            //     contentType: "application/json; charset=utf-8",
-            //     dataType: "json",
-            //     success: function (response) {
-            //         $("#sectionForInvoice").html(response);
-            //     },
-            //     failure: function (response) {
-            //         console.log(response.responseText);
-            //     },
-            //     error: function (response) {
-            //         console.log(response.responseText);
-            //     }
-            // });
         });
 
         $('#InvoicesTable').DataTable({
-            "proccessing": true,
             "serverSide": true,
-            "paging": true,
+            "proccessing": true,
+            "paging": true, 
+            "pagingType": 'full_numbers',
+            "pageLength": 5,
+            "lengthMenu": [5, 10, 20, 50, 100],
             "ajax": {
                 url: "/Invoices?handler=InvoiceData",
                 type: 'GET', 
                 // contentType: "application/json",
-                // dataType: "json",
+                 // dataType: "json",
                 headers: { 'RequestVerificationToken': $('@Html.AntiForgeryToken()').val() }
+            }, 
+            "language": {
+                processing: '<i class="fa fa-spinner fa-spin fa-3x fa-fw"></i>Processing...'
             },
             "columnDefs": [
                 // {
@@ -213,47 +188,43 @@
                 //     },
                 //     "sortable": false
                 // },
-                { "name": "irn", "data": "irn", "targets": 0, "visible": true },
-                { "name": "uuid", "data": "uuid", "targets": 1 },
-                { "name": "xmlFileName", "data": "xmlFileName", "targets": 2 },
+                { "searchable": true, "orderable": true, "name": "irn", "data": "irn", "targets": 0, "width": "40px", "visible": true },
+                { "searchable": true, "orderable": true, "name": "uuid", "data": "uuid", "width": "40px", "targets": 1 },
+                { "searchable": true, "orderable": true, "name": "xmlFileName", "data": "xmlFileName", "width": "40px", "targets": 2 },
                 // { "name": "TaxTotal", "data": "TaxTotal", "targets": 3 },
-                { "name": "docType", "data": "docType", "targets": 4 },
-                { "name": "action", "data": "action", "targets": 5 },
-                { "name": "actionStatus", "data": "actionStatus", "targets": 6 },
-                { "name": "transactionDate", "data": "transactionDate", "targets": 7 },
-                { "name": "storeNo", "data": "storeNo", "targets": 8 },
-                { "name": "terminalNo", "data": "terminalNo", "targets": 9 },
-                { "name": "trxNo", "data": "trxNo", "targets": 10 },
-                { "name": "timeleftToReport", "data": "timeleftToReport", "targets": 11 },
-                { "name": "reportedIn", "data": "reportedIn", "targets": 12 },
-                { "name": "source", "data": "source", "targets": 13 },
-                { "name": "actionCount", "data": "actionCount", "targets": 14 },
-                { "name": "errorCount", "data": "errorCount", "targets": 15 },
-                { "name": "warningCount", "data": "warningCount", "targets": 16 },
-                { "name": "createdDate", "data": "createdDate", "targets": 17 },
-                { "name": "updatedDate", "data": "updatedDate", "targets": 18 },
-                { "name": "totalRows", "data": "totalRows", "targets": 3 }
+                { "searchable": true, "orderable": true, "name": "docType", "data": "docType", "width": "30px", "targets": 3 },
+                { "searchable": true, "orderable": true, "name": "action", "data": "action", "width": "30px", "targets": 4 },
+                { "searchable": true, "orderable": true, "name": "actionStatus", "data": "actionStatus", "targets": 5 },
+                { "searchable": true, "orderable": true, "name": "transactionDate", "data": "transactionDate", "targets": 6 },
+                { "searchable": true, "orderable": true, "name": "storeNo", "data": "storeNo", "targets": 7 },
+                { "searchable": true, "orderable": true, "name": "terminalNo", "data": "terminalNo", "targets": 8 },
+                { "searchable": true, "orderable": true, "name": "trxNo", "data": "trxNo", "targets": 9 },
+                { "searchable": true, "orderable": true, "name": "timeleftToReport", "data": "timeleftToReport", "targets": 10 },
+                { "searchable": true, "orderable": true, "name": "reportedIn", "data": "reportedIn", "targets": 11 },
+                { "searchable": true, "orderable": true, "name": "source", "data": "source", "targets": 12 },
+                { "searchable": true, "orderable": true, "name": "actionCount", "data": "actionCount", "targets": 13 },
+                { "searchable": true, "orderable": true, "name": "errorCount", "data": "errorCount", "targets": 14 },
+                { "searchable": true, "orderable": true, "name": "warningCount", "data": "warningCount", "targets": 15 },
+                { "searchable": true, "orderable": true, "name": "createdDate", "data": "createdDate", "targets": 16 },
+                { "searchable": true, "orderable": true, "name": "updatedDate", "data": "updatedDate", "targets": 17 },
             ],
-            "order": [[0, "desc"]],
             initComplete: function () {
                 this.api()
-                    .columns()
-                    .every(function () {
-                        let column = this;
-                        let title = column.footer().textContent;
-
-                        // Create input element
-                        let input = document.createElement('input');
-                        input.placeholder = title;
-                        column.footer().replaceChildren(input);
-
-                        // Event listener for user input
-                        input.addEventListener('keyup', () => {
-                            if (column.search() !== this.value) {
-                                column.search(input.value).draw();
-                            }
-                        });
+                .columns()
+                .every(function () {
+                    let column = this;
+                    let title = column.footer().textContent;
+                    // Create input element
+                    let input = document.createElement('input');
+                    input.placeholder = title;
+                    column.footer().replaceChildren(input);
+                    // Event listener for user input
+                    input.addEventListener('keyup', () => {
+                        if (column.search() !== this.value) {
+                            column.search(input.value).draw();
+                        }
                     });
+                });
             }
         });
     })

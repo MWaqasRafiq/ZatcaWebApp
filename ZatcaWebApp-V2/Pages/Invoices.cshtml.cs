@@ -11,6 +11,8 @@ using ZatcaWebApp_V2.DataModel;
 using ZatcaWebApp_V2.ViewModel;
 using System.Linq.Dynamic.Core;
 using static System.Runtime.InteropServices.JavaScript.JSType;
+using ZatcaWebApp_V2.DataModel.Repository;
+using ZatcaWebApp_V2.DataModel.Repository.Interface;
 
 namespace ZatcaWebApp_V2.Pages
 {
@@ -18,7 +20,7 @@ namespace ZatcaWebApp_V2.Pages
     {
         private readonly ILogger<IndexModel> _logger;
         private readonly IConfiguration _configuration;
-        private readonly MasterPage _masterPage;
+        private readonly IReportsRepository _repository;
         private readonly ApplicationDBContext _context;
         public InvoicesModel(ILogger<IndexModel> logger, IConfiguration configuration,
             ApplicationDBContext context)
@@ -26,15 +28,13 @@ namespace ZatcaWebApp_V2.Pages
             _logger = logger;
             _configuration = configuration;
             _context = context;
-            _masterPage = new MasterPage(_logger, _configuration, _context);
+            _repository = new ReportsRepository(_logger, _configuration, _context);
         }
         public Invoices invoicesVM { get; set; }
         public List<SelectListItem> VatNo { get; set; }
         public List<DataTable> invoicesViewModel { get; set; }
         public List<InvoicesViewModel> InvoicesVM { get; set; }
 
-        [BindProperty]
-        public DataTablesRequest DataTablesRequest { get; set; }
         public async Task<IActionResult> OnGetAsync()
         {
             LoadVATDDL(false).GetAwaiter().GetResult();
@@ -58,18 +58,12 @@ namespace ZatcaWebApp_V2.Pages
             return Page();
         }
 
-        public async Task<IActionResult> OnGetInvoiceData()
+        public async Task<IActionResult> OnGetInvoiceData(DataTableAjaxPostModel model)
         {
             try
             {
-                var recordsTotal = 1000;
-                var param = new SqlParameter[] { };
-                var res = await _masterPage.ExecuteStoredProcedure<InvoicesVM>
-                                    ("SP_RPT_INVOICE", param.ToList(), true);
-
-
-                var query = res.AsQueryable();
-
+                var data = await _repository.GetInvoicesAsync(model.start+1, model.length);
+                int recordsTotal = 0, recordsFiltered = 0;
                 //var searchText = DataTablesRequest.Search.Value?.ToUpper();
                 //if (!string.IsNullOrWhiteSpace(searchText))
                 //{
@@ -80,8 +74,11 @@ namespace ZatcaWebApp_V2.Pages
                 //        s.PostalCode.ToUpper().Contains(searchText)
                 //    );
                 //}
-
-                var recordsFiltered = query.Count();
+                if (data.Count > 0)
+                {
+                    recordsTotal = data[0].TotalRows;
+                    recordsFiltered = recordsTotal;
+                }
 
                 //var sortColumnName = DataTablesRequest.Columns.ElementAt(DataTablesRequest.Order.ElementAt(0).Column).Name;
                 //var sortDirection = DataTablesRequest.Order.ElementAt(0).Dir.ToLower();
@@ -91,14 +88,11 @@ namespace ZatcaWebApp_V2.Pages
 
                 //var skip = DataTablesRequest.Start;
                 //var take = DataTablesRequest.Length;
-                var data = query
-                    //.Skip(skip)
-                    //.Take(take)
-                    .ToList();
+              
                 //return new JsonResult(data);
                 return new JsonResult(new
                 {
-                    Draw = 1,//DataTablesRequest.Draw,
+                    Draw = model.draw,//DataTablesRequest.Draw,
                     RecordsTotal = recordsTotal,
                     RecordsFiltered = recordsFiltered,
                     Data = data
@@ -119,16 +113,16 @@ namespace ZatcaWebApp_V2.Pages
         {
             try
             {
-                //enableAll = true;
+                enableAll = true;
                 VatNo = new List<SelectListItem>();
                 if (enableAll)
                     VatNo.Add(new SelectListItem("ALL", "ALL"));
 
-                var data = await _masterPage.ExecuteStoredProcedure<VatIdsVM>("select * from VATIDs where status=1", new List<SqlParameter>(), false);
+                //var data = await _masterPage.ExecuteStoredProcedure<VatIdsVM>("select * from VATIDs where status=1", new List<SqlParameter>(), false);
 
-                var itemList = (from p in data
-                                select new SelectListItem { Value = p.ConnectionString, Text = p.VATNo.ToString() }).ToList<SelectListItem>();
-                VatNo.AddRange(itemList);
+                //var itemList = (from p in data
+                //                select new SelectListItem { Value = p.ConnectionString, Text = p.VATNo.ToString() }).ToList<SelectListItem>();
+                //VatNo.AddRange(itemList);
             }
             catch (Exception ex)
             {
