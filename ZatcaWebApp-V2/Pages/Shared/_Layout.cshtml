@@ -56,11 +56,12 @@
                     <div class="navbar-holder d-flex align-items-center justify-content-between w-100">
                         <!-- Navbar Header-->
                         <div class="navbar-header">
-                            <!-- Navbar Brand --><a class="navbar-brand d-none d-sm-inline-block" href="index.html">
+                            <!-- Navbar Brand --><a class="navbar-brand d-none d-sm-inline-block" href="/">
                                 <div class="brand-text d-none d-lg-inline-block"><span>B </span><strong>Dashboard</strong></div>
                                 <div class="brand-text d-none d-sm-inline-block d-lg-none"><strong>BD</strong></div>
                             </a>
-                            <!-- Toggle Button--><a class="menu-btn active" id="toggle-btn" href="#"><span></span><span></span><span></span></a>
+                            <!-- Toggle Button-->
+                            @* <a class="menu-btn active" id="toggle-btn" href="#"><span></span><span></span><span></span></a> *@
                         </div>
                         <!-- Navbar Menu -->
                         <ul class="nav-menu list-unstyled d-flex flex-md-row align-items-md-center">
@@ -95,7 +96,7 @@
         </header>
         <div class="page-content d-flex align-items-stretch">
             <!-- Side Navbar -->
-            <nav class="side-navbar z-index-40">
+            <nav class="side-navbar z-index-40 shrinked">
 
                 <!-- Sidebar Navidation Menus--><span class="text-uppercase text-gray-400 text-xs letter-spacing-0 mx-3 px-2 heading"></span>
                 <ul class="list-unstyled py-4" id="ZatcaSideMenu">
@@ -129,12 +130,14 @@
                     </li>
                     <li class="sidebar-item">
                         <a class="sidebar-link" href="#exampledropdownDropdown" data-bs-toggle="collapse">
-                            <svg class="svg-icon svg-icon-sm svg-icon-heavy me-xl-2">
-                                <use xlink:href="#browser-window-1"> </use>
-                            </svg>Reports
+                            <img width="25" height="25" src="~/img/icon/report-graph.png" />
+                            Reports
                         </a>
                         <ul class="collapse list-unstyled " id="exampledropdownDropdown">
-                            <li><a class="sidebar-link" asp-area="" asp-page="/Invoices">Invoices</a></li>
+                            <li><a class="sidebar-link" asp-area="" asp-page="/Invoices">
+                                <img width="25" height="25" src="~/img/icon/invoice.png" />
+                                Invoices
+                            </a></li>
                             <li><a class="sidebar-link" href="#">Invoice Details</a></li>
                             <li><a class="sidebar-link" href="#">Invoice Counter</a></li>
                         </ul>
@@ -146,37 +149,6 @@
                             </svg>Login page
                         </a>
                     </li>
-                @* </ul><span class="text-uppercase text-gray-400 text-xs letter-spacing-0 mx-3 px-2 heading">Extras</span>
-                <ul class="list-unstyled py-4">
-                    <li class="sidebar-item">
-                        <a class="sidebar-link" asp-area="" asp-page="/Login">
-                            <svg class="svg-icon svg-icon-sm svg-icon-heavy me-xl-2">
-                                <use xlink:href="#imac-screen-1"> </use>
-                            </svg>Demo
-                        </a>
-                    </li>
-                    <li class="sidebar-item">
-                        <a class="sidebar-link" href="#">
-                            <svg class="svg-icon svg-icon-sm svg-icon-heavy me-xl-2">
-                                <use xlink:href="#chart-1"> </use>
-                            </svg>Demo
-                        </a>
-                    </li>
-                    <li class="sidebar-item">
-                        <a class="sidebar-link" href="#">
-                            <svg class="svg-icon svg-icon-sm svg-icon-heavy me-xl-2">
-                                <use xlink:href="#quality-1"> </use>
-                            </svg>Demo
-                        </a>
-                    </li>
-                    <li class="sidebar-item">
-                        <a class="sidebar-link" href="#">
-                            <svg class="svg-icon svg-icon-sm svg-icon-heavy me-xl-2">
-                                <use xlink:href="#security-shield-1"> </use>
-                            </svg>Demo
-                        </a>
-                    </li>
-                </ul> *@
             </nav>
             <div class="content-inner w-100">
                 <!-- Page Header-->
@@ -190,8 +162,8 @@
              
 
                 <!-- Page Footer-->
-                <footer class="position-absolute bottom-0 bg-darkBlue text-white text-center py-3 w-100 text-xs" id="footer">
-                    <div class="container-fluid">
+                <footer class="position-absolute bottom-0 bg-darkBlue text-white text-center w-100 px-4 py-3 z-index-20 text-xs" id="footer">
+                    <div class="container-fluid" style="padding-right: 0;">
                         <div class="row gy-2">
                             <div class="col-sm-6 text-sm-start">
                                 <p class="mb-0">Copyright &copy; @DateTime.Today.Year.ToString() - All rights reserved</p>

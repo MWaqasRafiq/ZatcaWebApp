@@ -5,6 +5,8 @@ using ZatcaWebApp_V2.Common;
 using ZatcaWebApp_V2.DataModel.Repository.Interface;
 using ZatcaWebApp_V2.Pages;
 using ZatcaWebApp_V2.ViewModel;
+using Dapper;
+using System.Data.SqlClient;
 
 namespace ZatcaWebApp_V2.DataModel.Repository
 {
@@ -26,14 +28,18 @@ namespace ZatcaWebApp_V2.DataModel.Repository
             List<InvoicesVM> invoices = new List<InvoicesVM>();
             try
             {
-                var param = new SqlParameter[] 
+                using (SqlConnection connection = new SqlConnection(_configuration.GetConnectionString("ConStr")))
                 {
-                    new SqlParameter(){ParameterName = "PageNumber", Value = PageNumber},
-                    new SqlParameter(){ParameterName = "PageSize", Value = PageSize}
-                };
-                //_context.Database.ExecuteSqlRaw("EXEC StoredProcedureName");
-                invoices = await _masterPage.ExecuteStoredProcedure<InvoicesVM>
-                                        ("SP_RPT_INVOICE", param.ToList(), true);
+                    var parameters = new { PageNumber = PageNumber, PageSize = PageSize };
+                    invoices = (List<InvoicesVM>)connection.Query<InvoicesVM>
+                        ("SP_RPT_INVOICE", parameters, commandType: System.Data.CommandType.StoredProcedure);
+                }
+                //var param = new SqlParameter[] 
+                //{
+                //    new SqlParameter(){ParameterName = "PageNumber", Value = PageNumber},
+                //    new SqlParameter(){ParameterName = "PageSize", Value = PageSize}
+                //};
+                //invoices = await _masterPage.ExecuteStoredProcedure<InvoicesVM>("SP_RPT_INVOICE", param.ToList(), true);
             }
             catch (Exception ex)
             {

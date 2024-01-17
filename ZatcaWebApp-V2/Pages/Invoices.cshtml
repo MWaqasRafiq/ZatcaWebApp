@@ -4,14 +4,54 @@
 @{
     ViewData["Title"] = "Invoice Report";
     Layout = "_Layout";
-    // List<string> listOfColumns = new List<string>();
 }
 @Html.AntiForgeryToken()
-@* <partial name="~/Pages/Shared/_InvoiceTable.cshtml" /> *@
 
-<div class="overflow-auto pb-0 pt-0 w-100" style="padding-right: 6rem;">
+<div class="container-fluid overflow-auto pt-2" style="padding-right: 5rem;">
+    <div class="row gy-4">
+        <div class="col-lg-12">
+            <div class="card mb-0">
+                <div class="card-body">
+                    <div class="table-responsive">
+                        <table class="table mb-0 table-striped table-hover w-100 wrap" style="font-size: 12px;word-wrap: break-word; word-break: break-all;" id="InvoicesTable">
+                            <thead>
+                                <tr>
+                                    @foreach (DataColumn column in Model.invoicesViewModel[0].Columns)
+                                    {
+                                        if (@column.ColumnName.ToLower() != "totalrows")
+                                        {
+                                            <th>@column.ColumnName</th>
+                                        }
+                                    }
+                                </tr>
+                            </thead>
+                            <tfoot>
+                                <tr>
+                                    @foreach (DataColumn column in Model.invoicesViewModel[0].Columns)
+                                    {
+                                        if (@column.ColumnName.ToLower() != "totalrows")
+                                        {
+                                            <th>@column.ColumnName</th>
+                                        }
+                                    }
+                                </tr>
+                            </tfoot>
+                        </table>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+@* <style>
+    .dataTables_filter{
+        display:none;
+    }
+</style> *@
+@* <div class="overflow-auto pb-0 pt-0 w-100" style="padding-right: 5.2rem;">
     <section class="pb-1 pt-1">
-        @* <div style="text-align:right" class="container-fluid">
+         <div style="text-align:right" class="container-fluid">
             <button type="button" id="btn_filters" class="btn btn-info" data-toggle="collapse" data-target="#demo">Filters</button>
             <div id="demo" class="collapse card mb-0 mt-2" style="text-align:left">
                 <div class="card-body">
@@ -55,74 +95,12 @@
                     </div>
                 </div>
             </div>
-        </div> *@
-    </section>
-    @* <section class="tables pt-2" id="sectionForInvoice"></section> *@
-
-    <div class="container-fluid">
-        <div class="row gy-4">
-            <div class="col-lg-12">
-                <div class="card mb-0">
-                    <div class="card-body">
-                        <div class="table-responsive" @* style="max-height: 90vh;" *@>
-                            <table class="table mb-0 table-striped table-hover w-100 wrap" style="font-size: 12px;word-wrap: break-word; word-break: break-all;" id="InvoicesTable">
-                                <thead>
-                                    <tr>
-                                        @foreach (DataColumn column in Model.invoicesViewModel[0].Columns)
-                                        {
-                                            if (@column.ColumnName.ToLower() != "totalrows")
-                                            {
-                                                <th>@column.ColumnName</th>
-                                                @* listOfColumns.Add(column.ColumnName); *@
-                                            }
-                                        }
-                                    </tr>
-                                </thead>
-                                @*  <tbody>
-
-                                @foreach (DataRow row in Model.InvoiceTable.Rows)
-                                {
-                                <tr>
-
-                                @foreach (string col in listOfColumns)
-                                {
-                                <td>@row[col].ToString()</td>
-                                }
-                                </tr>
-                                }
-                                </tbody> *@
-                                <tfoot>
-                                    <tr>
-                                        @foreach (DataColumn column in Model.invoicesViewModel[0].Columns)
-                                        {
-                                            if (@column.ColumnName.ToLower() != "totalrows")
-                                            {
-                                                <th>@column.ColumnName</th>
-                                            }
-                                        }
-                                    </tr>
-                                </tfoot>
-                            </table>
-                        </div>
-                    </div>
-                </div>
-            </div>
         </div>
-    </div>
-</div>
+        </section>
+</div>*@
 
-@* <link href=’https://ajax.googleapis.com/ajax/libs/jqueryui/1.12.1/themes/ui-lightness/jquery-ui.css’ rel=’stylesheet’> *@
-@* <script src="~/lib/jquery/dist/jquery.js"></script> *@
-@* <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.6.2/dist/js/bootstrap.min.js" integrity="sha384-+sLIOodYLS7CIrQpBjl+C7nPvqq+FbNUBDunl/OZv93DB7Ln/533i8e/mZXLi/P+" crossorigin="anonymous"></script> *@
-@* <script src="~/lib/bootstrap/dist/js/bootstrap.js"></script> *@
-@* <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datepicker/1.10.0/css/bootstrap-datepicker.min.css" integrity="sha512-34s5cpvaNG3BknEWSuOncX28vz97bRI59UnVtEEpFX536A7BtZSJHsDyFoCl8S7Dt2TPzcrCEoHBGeM4SUBDBw==" crossorigin="anonymous" referrerpolicy="no-referrer" />
-<script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datepicker/1.10.0/js/bootstrap-datepicker.min.js" integrity="sha512-LsnSViqQyaXpD4mBBdRYeP6sRwJiJveh2ZIbW41EBrNmKxgr/LFZIiWT6yr+nycvhvauz8c2nYMhrP80YhG7Cw==" crossorigin="anonymous" referrerpolicy="no-referrer"></script> *@
+<script src="https://code.jquery.com/jquery-3.6.0.min.js" integrity="sha256-/xUj+3OJU5yExlq6GSYGSHk7tPXikynS7ogEvDej/m4=" crossorigin="anonymous"></script>
 
-@* <script src="https://code.jquery.com/ui/1.13.2/jquery-ui.js"></script> *@
-@* <script src="https://ajax.googleapis.com/ajax/libs/jqueryui/1.12.1/jquery-ui.min.js">  </script> *@
-<script src="https://code.jquery.com/jquery-3.6.0.min.js"
-        integrity="sha256-/xUj+3OJU5yExlq6GSYGSHk7tPXikynS7ogEvDej/m4="
-        crossorigin="anonymous"></script>
 <script>
     $('ul#exampledropdownDropdown li:nth-child(1)').addClass("active");
     $('#PageheadGeneral').text('Invoices');
@@ -136,7 +114,7 @@
                 changeYear: true
             });
         });
-    
+
         $("#sub_button").click(function () {
             var invoices = {
                 // VatNo: $('#ddlVAT').val(),
@@ -164,20 +142,19 @@
 
         $('#InvoicesTable').DataTable({
             "serverSide": true,
-            "proccessing": true,
-            "paging": true, 
+            "processing": true,
+            "paging": true,
+            "orderCellsTop": true,
+            "fixedHeader": true,
             "pagingType": 'full_numbers',
             "pageLength": 5,
             "lengthMenu": [5, 10, 20, 50, 100],
             "ajax": {
                 url: "/Invoices?handler=InvoiceData",
-                type: 'GET', 
+                type: 'GET',
                 // contentType: "application/json",
-                 // dataType: "json",
+                // dataType: "json",
                 headers: { 'RequestVerificationToken': $('@Html.AntiForgeryToken()').val() }
-            }, 
-            "language": {
-                processing: '<i class="fa fa-spinner fa-spin fa-3x fa-fw"></i>Processing...'
             },
             "columnDefs": [
                 // {
@@ -188,45 +165,45 @@
                 //     },
                 //     "sortable": false
                 // },
-                { "searchable": true, "orderable": true, "name": "irn", "data": "irn", "targets": 0, "width": "40px", "visible": true },
+                { "searchable": true, "orderable": true, "name": "irn", "data": "irn", "targets": 0, "width": "70px", "visible": true },
                 { "searchable": true, "orderable": true, "name": "uuid", "data": "uuid", "width": "40px", "targets": 1 },
                 { "searchable": true, "orderable": true, "name": "xmlFileName", "data": "xmlFileName", "width": "40px", "targets": 2 },
                 // { "name": "TaxTotal", "data": "TaxTotal", "targets": 3 },
-                { "searchable": true, "orderable": true, "name": "docType", "data": "docType", "width": "30px", "targets": 3 },
-                { "searchable": true, "orderable": true, "name": "action", "data": "action", "width": "30px", "targets": 4 },
-                { "searchable": true, "orderable": true, "name": "actionStatus", "data": "actionStatus", "targets": 5 },
-                { "searchable": true, "orderable": true, "name": "transactionDate", "data": "transactionDate", "targets": 6 },
-                { "searchable": true, "orderable": true, "name": "storeNo", "data": "storeNo", "targets": 7 },
-                { "searchable": true, "orderable": true, "name": "terminalNo", "data": "terminalNo", "targets": 8 },
-                { "searchable": true, "orderable": true, "name": "trxNo", "data": "trxNo", "targets": 9 },
-                { "searchable": true, "orderable": true, "name": "timeleftToReport", "data": "timeleftToReport", "targets": 10 },
-                { "searchable": true, "orderable": true, "name": "reportedIn", "data": "reportedIn", "targets": 11 },
-                { "searchable": true, "orderable": true, "name": "source", "data": "source", "targets": 12 },
-                { "searchable": true, "orderable": true, "name": "actionCount", "data": "actionCount", "targets": 13 },
-                { "searchable": true, "orderable": true, "name": "errorCount", "data": "errorCount", "targets": 14 },
-                { "searchable": true, "orderable": true, "name": "warningCount", "data": "warningCount", "targets": 15 },
-                { "searchable": true, "orderable": true, "name": "createdDate", "data": "createdDate", "targets": 16 },
-                { "searchable": true, "orderable": true, "name": "updatedDate", "data": "updatedDate", "targets": 17 },
+                { "searchable": true, "orderable": true, "name": "docType", "data": "docType", "width": "20px", "targets": 3 },
+                { "searchable": true, "orderable": true, "name": "action", "data": "action", "width": "40px", "targets": 4 },
+                { "searchable": true, "orderable": true, "name": "actionStatus", "data": "actionStatus", "width": "40px", "targets": 5 },
+                { "searchable": true, "orderable": true, "name": "transactionDate", "data": "transactionDate", "width": "40px", "targets": 6 },
+                { "searchable": true, "orderable": true, "name": "storeNo", "data": "storeNo", "width": "40px", "targets": 7 },
+                { "searchable": true, "orderable": true, "name": "terminalNo", "data": "terminalNo", "width": "40px", "targets": 8 },
+                { "searchable": true, "orderable": true, "name": "trxNo", "data": "trxNo", "width": "40px", "targets": 9 },
+                { "searchable": true, "orderable": true, "name": "timeleftToReport", "data": "timeleftToReport", "width": "40px", "targets": 10 },
+                { "searchable": true, "orderable": true, "name": "reportedIn", "data": "reportedIn", "width": "40px", "targets": 11 },
+                { "searchable": true, "orderable": true, "name": "source", "data": "source", "width": "40px", "targets": 12 },
+                { "searchable": true, "orderable": true, "name": "actionCount", "data": "actionCount", "width": "40px", "targets": 13 },
+                { "searchable": true, "orderable": true, "name": "errorCount", "data": "errorCount", "width": "40px", "targets": 14 },
+                { "searchable": true, "orderable": true, "name": "warningCount", "data": "warningCount", "width": "40px", "targets": 15 },
+                { "searchable": true, "orderable": true, "name": "createdDate", "data": "createdDate", "width": "40px", "targets": 16 },
+                { "searchable": true, "orderable": true, "name": "updatedDate", "data": "updatedDate", "width": "40px", "targets": 17 },
             ],
             initComplete: function () {
                 this.api()
-                .columns()
-                .every(function () {
-                    let column = this;
-                    let title = column.footer().textContent;
-                    // Create input element
-                    let input = document.createElement('input');
-                    input.placeholder = title;
-                    column.footer().replaceChildren(input);
-                    // Event listener for user input
-                    input.addEventListener('keyup', () => {
-                        if (column.search() !== this.value) {
-                            column.search(input.value).draw();
-                        }
+                    .columns()
+                    .every(function () {
+                        let column = this;
+                        let title = column.footer().textContent;
+                        // Create input element
+                        let input = document.createElement('input');
+                        input.placeholder = title;
+                        column.footer().replaceChildren(input);
+                        // Event listener for user input
+                        input.addEventListener('keyup', () => {
+                            if (column.search() !== this.value) {
+                                column.search(input.value).draw();
+                            }
+                        });
                     });
-                });
             }
         });
     })
-  
+
 </script>

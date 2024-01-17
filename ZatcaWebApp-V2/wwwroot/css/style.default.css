@@ -14007,8 +14007,8 @@ nav.side-navbar .sidebar-header .avatar {
   }
 }
 nav.side-navbar.shrinked {
-  min-width: 90px;
-  max-width: 90px;
+  min-width: 70px;
+  max-width: 80px;
   text-align: center;
 }
 @media (max-width: 1199.98px) {
