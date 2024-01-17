@@ -95,7 +95,7 @@ https://bootstrapious.com/p/admin-template
   --bs-border-radius-2xl: 2rem;
   --bs-border-radius-pill: 50rem;
   --bs-link-color: #796AEE;
-  --bs-link-hover-color: #3b25e6;
+  --bs-link-hover-color: #fafafa;
   --bs-code-color: #d63384;
   --bs-highlight-bg: #fcf8e3;
 }
@@ -14028,24 +14028,25 @@ nav.side-navbar.shrinked .sidebar-header .title {
 }
 .sidebar-item li a {
   padding-left: 50px;
-  background: #EEF5F9;
+  background: #f2f2f2;
 }
-.sidebar-item.active > .sidebar-link {
-  color: #fff;
-  border-left: 4px solid #3b25e6;
-  background: #796AEE;
-}
-.sidebar-item.active > .sidebar-link:hover {
-  background: #796AEE;
-}
-.sidebar-item li.active > .sidebar-link {
-  color: #fff;
-  border-left: 4px solid #3b25e6;
-  background: #8e81f1;
-}
-.sidebar-item .collapse {
-  background: #EEF5F9;
-}
+    .sidebar-item.active > .sidebar-link {
+        color: #000;
+        border-left: 4px solid #3b25e6;
+        background: #f2f2f2;
+    }
+        .sidebar-item.active > .sidebar-link:hover {
+            background: #f8fbff;
+            color: #000;
+        }
+    .sidebar-item li.active > .sidebar-link {
+        color: #000;
+        border-left: 4px solid #3b25e6;
+        background: #f2f2f2;
+    }
+    .sidebar-item .collapse {
+        background: #f2f2f2;
+    }
 
 .sidebar-link {
   display: block;
@@ -14077,9 +14078,9 @@ nav.side-navbar.shrinked .sidebar-header .title {
   }
 }
 .sidebar-link:hover {
-  color: #fff;
-  border-left: 4px solid #3b25e6;
-  background: #796AEE;
+    color: #000;
+    border-left: 4px solid #3b25e6;
+    background: #f8fbff;
 }
 .sidebar-link[data-bs-toggle=collapse]::before {
   display: block;
@@ -14110,7 +14111,7 @@ nav.side-navbar.shrinked .sidebar-header .title {
   }
 }
 .sidebar-link[aria-expanded=true], .sidebar-link[aria-expanded=aria-expanded] {
-  background: #EEF5F9;
+  /*background: #EEF5F9;*/
 }
 .sidebar-link[aria-expanded=true]::before, .sidebar-link[aria-expanded=aria-expanded]::before {
   -webkit-transform: translateY(-50%) rotate(-90deg);
@@ -14123,8 +14124,8 @@ nav.side-navbar.shrinked .sidebar-header .title {
   }
 }
 .sidebar-link[aria-expanded=true]:hover, .sidebar-link[aria-expanded=aria-expanded]:hover {
-  color: #fff;
-  background: #796AEE;
+    color: #000;
+    background: #f8fbff;
 }
 .sidebar-link .badge {
   vertical-align: middle;
@@ -14161,14 +14162,22 @@ nav.side-navbar.shrinked .sidebar-header .title {
   margin-right: 0 !important;
   margin-bottom: 4px;
 }
-
-/*====== Client Profile Box ======*/
-.client-avatar {
-  position: relative;
-  width: 100px;
-  height: 100px;
-  margin: 0 auto;
+.sidebar-item li > .sidebar-link {
+    color: #000;
+    border-top: 1px solid #212529;
+    border-bottom: 1px solid #212529;
+    background: #fafafa;
 }
+    .sidebar-item li > .sidebar-link:hover {
+        background: #f8fbff;
+    }
+    /*====== Client Profile Box ======*/
+    .client-avatar {
+        position: relative;
+        width: 100px;
+        height: 100px;
+        margin: 0 auto;
+    }
 .client-avatar .status {
   display: block;
   width: 18px;
@@ -14187,9 +14196,9 @@ nav.side-navbar.shrinked .sidebar-header .title {
 * ==========================================================
 */
 nav.navbar {
-  background: #2f333e;
-  /*==== Navbar Items ====*/
-  /*==== Search Box ====*/
+    background: #002896;
+    /*==== Navbar Items ====*/
+    /*==== Search Box ====*/
 }
 nav.navbar .badge {
   display: -webkit-box;

@@ -68,7 +68,9 @@
                             <!-- Languages dropdown    -->
                             <li class="nav-item dropdown">
                                 <a class="nav-link text-white dropdown-toggle d-flex align-items-center" id="languages" href="#" data-bs-toggle="dropdown" aria-expanded="false">
-                                    <span class="d-none d-sm-inline-block">Settings</span></a>
+                                    <span class="d-none d-sm-inline-block">Settings</span>
+                                    <img width="27" height="27" src="~/img/icon/setting.png" />
+                                </a>
                                 <ul class="dropdown-menu dropdown-menu-end mt-3 shadow-sm" aria-labelledby="languages">
                                     <li><a class="dropdown-item" rel="nofollow" href="#"> <span class="text-xs text-gray-700">Create User</span></a></li>
                                     <li><a class="dropdown-item" rel="nofollow" href="#"> <span class="text-xs text-gray-700">Reset Password                                         </span></a></li>
@@ -78,9 +80,7 @@
                             <li class="nav-item">
                                 <a class="nav-link text-white" asp-page="/Login">
                                     <span class="d-none d-sm-inline">Logout</span>
-                                    <svg class="svg-icon svg-icon-xs svg-icon-heavy">
-                                        <use xlink:href="#security-1"> </use>
-                                    </svg>
+                                    <img width="27" height="27" src="~/img/icon/logout.png" />
                                 </a>
                             </li>
                         </ul>
@@ -96,30 +96,22 @@
                 <ul class="list-unstyled py-4" id="ZatcaSideMenu">
                     <li class="sidebar-item">
                         <a class="sidebar-link" asp-area="" asp-page="/Index">
-                            <svg class="svg-icon svg-icon-sm svg-icon-heavy me-xl-2">
-                                <use xlink:href="#real-estate-1"> </use>
-                            </svg>Home
+                            <img width="25" height="25" src="~/img/icon/dashboard.png" />Dashboard
                         </a>
                     </li>
                     <li class="sidebar-item">
                         <a class="sidebar-link" asp-area="" asp-page="/Tables">
-                            <svg class="svg-icon svg-icon-sm svg-icon-heavy me-xl-2">
-                                <use xlink:href="#portfolio-grid-1"> </use>
-                            </svg>Tables
+                            <img width="25" height="25" src="~/img/icon/grid.png" />Tables
                         </a>
                     </li>
                     <li class="sidebar-item">
                         <a class="sidebar-link" asp-area="" asp-page="/Charts">
-                            <svg class="svg-icon svg-icon-sm svg-icon-heavy me-xl-2">
-                                <use xlink:href="#sales-up-1"> </use>
-                            </svg>Charts
+                            <img width="25" height="25" src="~/img/icon/chart.png" />Charts
                         </a>
                     </li>
                     <li class="sidebar-item">
                         <a class="sidebar-link" asp-area="" asp-page="/Privacy">
-                            <svg class="svg-icon svg-icon-sm svg-icon-heavy me-xl-2">
-                                <use xlink:href="#survey-1"> </use>
-                            </svg>Forms
+                            <img width="25" height="25" src="~/img/icon/form.png" />Forms
                         </a>
                     </li>
                     <li class="sidebar-item">
@@ -129,20 +121,17 @@
                         </a>
                         <ul class="collapse list-unstyled " id="exampledropdownDropdown">
                             <li><a class="sidebar-link" asp-area="" asp-page="/Invoices">
-                                <img width="25" height="25" src="~/img/icon/invoice.png" />
-                                Invoices
+                                <img width="25" height="25" src="~/img/icon/invoice.png" />Invoices
                             </a></li>
                             <li><a class="sidebar-link" href="#">Invoice Details</a></li>
                             <li><a class="sidebar-link" href="#">Invoice Counter</a></li>
                         </ul>
                     </li>
-                    <li class="sidebar-item">
+                  @*   <li class="sidebar-item">
                         <a class="sidebar-link" asp-page="/Login">
-                            <svg class="svg-icon svg-icon-sm svg-icon-heavy me-xl-2">
-                                <use xlink:href="#disable-1"> </use>
-                            </svg>Login page
+                            <img width="25" height="25" src="~/img/icon/login.png" /> Login
                         </a>
-                    </li>
+                    </li> *@
             </nav>
             <div class="content-inner w-100">
                 <!-- Page Header-->
