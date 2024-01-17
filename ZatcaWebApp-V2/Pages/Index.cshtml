@@ -29,9 +29,10 @@
                     <div class="col-xl-3 col-sm-6 py-4 border-lg-end border-gray-200">
                         <div class="d-flex align-items-center">
                             <div class="icon flex-shrink-0 bg-violet">
-                                <svg class="svg-icon svg-icon-sm svg-icon-heavy">
+                                <i class="fa fa-solid fa-check"></i>
+                                @*  <svg class="svg-icon svg-icon-sm svg-icon-heavy">
                                     <use xlink:href="#user-1"> </use>
-                                </svg>
+                                </svg> *@
                             </div>
                             <div class="mx-3">
                                 <h6 class="h4 fw-light text-gray-600 mb-1">VAT Submitted</h6>
@@ -46,12 +47,13 @@
                     <div class="col-xl-3 col-sm-6 py-4 border-lg-end border-gray-200">
                         <div class="d-flex align-items-center">
                             <div class="icon flex-shrink-0 bg-red">
-                                <svg class="svg-icon svg-icon-sm svg-icon-heavy">
+                                <i class="fa fa-solid fa-exclamation"></i>
+                               @*  <svg class="svg-icon svg-icon-sm svg-icon-heavy">
                                     <use xlink:href="#survey-1"> </use>
-                                </svg>
+                                </svg> *@
                             </div>
                             <div class="mx-3">
-                                <h6 class="h4 fw-light text-gray-600 mb-1">VAT >Failed</h6>
+                                <h6 class="h4 fw-light text-gray-600 mb-1">VAT Failed</h6>
                                 <div class="number mb-1"><strong class="text-lg">@Convert.ToInt32(Model.dashboardChartData.TotalVatFailed)</strong></div>
                                 <div class="progress" style="height: 4px" title="@(failedProgress.ToString())%">
                                     <div class="progress-bar bg-red" role="progressbar" style="width: @(failedProgress.ToString())%; height: 5px;" aria-valuenow="@(failedProgress.ToString())" aria-valuemin="0" aria-valuemax="100"></div>
@@ -63,9 +65,10 @@
                     <div class="col-xl-3 col-sm-6 py-4 border-lg-end border-gray-200">
                         <div class="d-flex align-items-center">
                             <div class="icon flex-shrink-0 bg-green">
-                                <svg class="svg-icon svg-icon-sm svg-icon-heavy">
+                                <i class="fa fa-solid fa-heart"></i>
+                             @*    <svg class="svg-icon svg-icon-sm svg-icon-heavy">
                                     <use xlink:href="#numbers-1"> </use>
-                                </svg>
+                                </svg> *@
                             </div>
                             <div class="mx-3">
                                 <h6 class="h4 fw-light text-gray-600 mb-1">VAT Processed</h6>
@@ -80,9 +83,10 @@
                     <div class="col-xl-3 col-sm-6 py-4">
                         <div class="d-flex align-items-center">
                             <div class="icon flex-shrink-0 bg-orange">
-                                <svg class="svg-icon svg-icon-sm svg-icon-heavy">
+                                <i class="fa fa-solid fa-handshake"></i>
+                              @*   <svg class="svg-icon svg-icon-sm svg-icon-heavy">
                                     <use xlink:href="#list-details-1"> </use>
-                                </svg>
+                                </svg> *@
                             </div>
                             <div class="mx-3">
                                 <h6 class="h4 fw-light text-gray-600 mb-1">VAT B2B</h6>
