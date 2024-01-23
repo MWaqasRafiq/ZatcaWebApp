@@ -143,6 +143,8 @@
         $('#InvoicesTable').DataTable({
             "serverSide": true,
             "processing": true,
+            "responsive": true,
+            "filter": true,
             "paging": true,
             "orderCellsTop": true,
             "fixedHeader": true,
@@ -151,10 +153,13 @@
             "lengthMenu": [5, 10, 20, 50, 100],
             "ajax": {
                 url: "/Invoices?handler=InvoiceData",
-                type: 'GET',
-                // contentType: "application/json",
+                type: 'POST',
+                // contentType: "application/json; charset=utf-8",
                 // dataType: "json",
-                headers: { 'RequestVerificationToken': $('@Html.AntiForgeryToken()').val() }
+                // headers: { 'RequestVerificationToken': $('@Html.AntiForgeryToken()').val() }
+                beforeSend: function (xhr) {
+                    xhr.setRequestHeader("XSRF-TOKEN", $('@Html.AntiForgeryToken()').val());
+                }
             },
             "columnDefs": [
                 // {
@@ -166,41 +171,62 @@
                 //     "sortable": false
                 // },
                 { "searchable": true, "orderable": true, "name": "irn", "data": "irn", "targets": 0, "width": "70px", "visible": true },
-                { "searchable": true, "orderable": true, "name": "uuid", "data": "uuid", "width": "40px", "targets": 1 },
-                { "searchable": true, "orderable": true, "name": "xmlFileName", "data": "xmlFileName", "width": "40px", "targets": 2 },
+                { "searchable": false, "orderable": false, "name": "xmlFileName", "data": "xmlFileName", "width": "70px", "targets": 1 },
+                { "searchable": true, "orderable": true, "name": "docType", "data": "docType", "width": "20px", "targets": 2 },
+                { "searchable": true, "orderable": true, "name": "actionStatus", "data": "actionStatus", "width": "40px", "targets": 3 },
+                { "searchable": true, "orderable": true, "name": "storeNo", "data": "storeNo", "width": "40px", "targets": 4 },
+                { "searchable": true, "orderable": true, "name": "transactionDate", "data": "transactionDate", "width": "40px", "targets": 5 },
+                { "searchable": false, "orderable": false, "name": "uuid", "data": "uuid", "width": "70px", "targets": 6 },
+                { "searchable": true, "orderable": true, "name": "terminalNo", "data": "terminalNo", "width": "40px", "targets": 7 },
+                { "searchable": true, "orderable": true, "name": "trxNo", "data": "trxNo", "width": "40px", "targets": 8 },
+                { "searchable": true, "orderable": true, "name": "source", "data": "source", "width": "40px", "targets": 9 },
                 // { "name": "TaxTotal", "data": "TaxTotal", "targets": 3 },
-                { "searchable": true, "orderable": true, "name": "docType", "data": "docType", "width": "20px", "targets": 3 },
-                { "searchable": true, "orderable": true, "name": "action", "data": "action", "width": "40px", "targets": 4 },
-                { "searchable": true, "orderable": true, "name": "actionStatus", "data": "actionStatus", "width": "40px", "targets": 5 },
-                { "searchable": true, "orderable": true, "name": "transactionDate", "data": "transactionDate", "width": "40px", "targets": 6 },
-                { "searchable": true, "orderable": true, "name": "storeNo", "data": "storeNo", "width": "40px", "targets": 7 },
-                { "searchable": true, "orderable": true, "name": "terminalNo", "data": "terminalNo", "width": "40px", "targets": 8 },
-                { "searchable": true, "orderable": true, "name": "trxNo", "data": "trxNo", "width": "40px", "targets": 9 },
-                { "searchable": true, "orderable": true, "name": "timeleftToReport", "data": "timeleftToReport", "width": "40px", "targets": 10 },
-                { "searchable": true, "orderable": true, "name": "reportedIn", "data": "reportedIn", "width": "40px", "targets": 11 },
-                { "searchable": true, "orderable": true, "name": "source", "data": "source", "width": "40px", "targets": 12 },
-                { "searchable": true, "orderable": true, "name": "actionCount", "data": "actionCount", "width": "40px", "targets": 13 },
-                { "searchable": true, "orderable": true, "name": "errorCount", "data": "errorCount", "width": "40px", "targets": 14 },
-                { "searchable": true, "orderable": true, "name": "warningCount", "data": "warningCount", "width": "40px", "targets": 15 },
-                { "searchable": true, "orderable": true, "name": "createdDate", "data": "createdDate", "width": "40px", "targets": 16 },
-                { "searchable": true, "orderable": true, "name": "updatedDate", "data": "updatedDate", "width": "40px", "targets": 17 },
+                { "searchable": false, "orderable": false, "name": "action", "data": "action", "width": "70px", "targets": 10 },
+                { "searchable": false, "orderable": false, "name": "timeleftToReport", "data": "timeleftToReport", "width": "70px", "targets": 11 },
+                { "searchable": false, "orderable": false, "name": "reportedIn", "data": "reportedIn", "width": "70px", "targets": 12 },
+                { "searchable": false, "orderable": false, "name": "actionCount", "data": "actionCount", "width": "70px", "targets": 13 },
+                { "searchable": false, "orderable": false, "name": "errorCount", "data": "errorCount", "width": "70px", "targets": 14 },
+                { "searchable": false, "orderable": false, "name": "warningCount", "data": "warningCount", "width": "70px", "targets": 15 },
+                { "searchable": false, "orderable": false, "name": "createdDate", "data": "createdDate", "width": "70px", "targets": 16 },
+                { "searchable": false, "orderable": false, "name": "updatedDate", "data": "updatedDate", "width": "70px", "targets": 17 },
             ],
             initComplete: function () {
+                var columns = this.api().init().columnDefs;
                 this.api()
                     .columns()
-                    .every(function () {
-                        let column = this;
-                        let title = column.footer().textContent;
-                        // Create input element
-                        let input = document.createElement('input');
-                        input.placeholder = title;
-                        column.footer().replaceChildren(input);
-                        // Event listener for user input
-                        input.addEventListener('keyup', () => {
-                            if (column.search() !== this.value) {
-                                column.search(input.value).draw();
-                            }
-                        });
+                    .every(function (index) {
+                        if (!columns[index] || columns[index].searchable) {
+                            let column = this;
+                            let title = column.footer().textContent;
+                            debugger;
+                            // Create input element
+                            let input = document.createElement('input');
+                            input.placeholder = title;
+                            column.footer().replaceChildren(input);
+                            // Event listener for user input
+                            input.addEventListener('change', () => {
+                                if (column.search() !== this.value) {
+                                    column.search(input.value).draw();
+                                }
+                            });
+                        }
+                        else {
+                            let column = this;
+                            let title = column.footer().textContent;
+                            debugger;
+                            // Create input element
+                            let input = document.createElement('input');
+                            // input.placeholder = title;
+                            input.readOnly = true;
+                            column.footer().replaceChildren(input);
+                            // Event listener for user input
+                            input.addEventListener('change', () => {
+                                if (column.search() !== this.value) {
+                                    column.search(input.value).draw();
+                                }
+                            });
+                            $('#InvoicesTable input[readonly]').css("border", "0");
+                        }
                     });
             }
         });

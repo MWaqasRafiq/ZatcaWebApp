@@ -13,6 +13,7 @@ using System.Linq.Dynamic.Core;
 using static System.Runtime.InteropServices.JavaScript.JSType;
 using ZatcaWebApp_V2.DataModel.Repository;
 using ZatcaWebApp_V2.DataModel.Repository.Interface;
+using Microsoft.Extensions.Primitives;
 
 namespace ZatcaWebApp_V2.Pages
 {
@@ -58,12 +59,37 @@ namespace ZatcaWebApp_V2.Pages
             return Page();
         }
 
-        public async Task<IActionResult> OnGetInvoiceData(DataTableAjaxPostModel model)
+        public async Task<IActionResult> OnPostInvoiceData()
         {
             try
             {
-                var data = await _repository.GetInvoicesAsync(model.start+1, model.length);
-                int recordsTotal = 0, recordsFiltered = 0;
+                int recordsTotal = 0;
+                int recordsFiltered = 0;
+                var draw = Request.Form["draw"].FirstOrDefault();
+                var sortColumn = Request.Form["columns[" + Request.Form["order[0][column]"].FirstOrDefault() + "][name]"].FirstOrDefault();
+                var sortColumnDirection = Request.Form["order[0][dir]"].FirstOrDefault();
+                var searchValue = Request.Form["search[value]"].FirstOrDefault();
+                int pageSize = Convert.ToInt32(Request.Form["length"].FirstOrDefault() ?? "5");
+                int pageNum = Convert.ToInt32(Request.Form["start"].FirstOrDefault() ?? "0");
+                if (pageNum > 0)
+                    pageNum = (pageNum / pageSize) + 1;
+                else
+                    pageNum++;
+
+                List<KeyValuePair<string, string>> valuePairs = new List<KeyValuePair<string, string>>();
+
+                for(int i = 0; i < 17; i++)
+                {
+                    string val = Request.Form["columns[" + i + "]" + "[search][value]"].FirstOrDefault() ?? "";
+                    if (!string.IsNullOrEmpty(val))
+                    {
+                        string colmn = Request.Form["columns[" + i + "]" + "[name]"].FirstOrDefault() ?? "";
+                        valuePairs.Add(new KeyValuePair<string, string>(colmn,val));
+                    }
+                }
+
+                var data = await _repository.GetInvoicesAsync(valuePairs, pageNum, pageSize);
+
                 //var searchText = DataTablesRequest.Search.Value?.ToUpper();
                 //if (!string.IsNullOrWhiteSpace(searchText))
                 //{
@@ -74,38 +100,29 @@ namespace ZatcaWebApp_V2.Pages
                 //        s.PostalCode.ToUpper().Contains(searchText)
                 //    );
                 //}
+
                 if (data.Count > 0)
                 {
                     recordsTotal = data[0].TotalRows;
                     recordsFiltered = recordsTotal;
                 }
 
-                //var sortColumnName = DataTablesRequest.Columns.ElementAt(DataTablesRequest.Order.ElementAt(0).Column).Name;
-                //var sortDirection = DataTablesRequest.Order.ElementAt(0).Dir.ToLower();
-
-                // using System.Linq.Dynamic.Core
-                //query = query.OrderBy($"{sortColumnName} {sortDirection}");
-
-                //var skip = DataTablesRequest.Start;
-                //var take = DataTablesRequest.Length;
-              
-                //return new JsonResult(data);
                 return new JsonResult(new
                 {
-                    Draw = model.draw,//DataTablesRequest.Draw,
+                    Draw = draw,//DataTablesRequest.Draw,
                     RecordsTotal = recordsTotal,
                     RecordsFiltered = recordsFiltered,
                     Data = data
                 });
             }
             catch (Exception ex)
-                {
+            {
                 return new JsonResult(new
                 {
-                    Draw = 0,
+                    Draw = 1,
                     RecordsTotal = 0,
                     RecordsFiltered = 0,
-                    Data = ""
+                    Data = new List<InvoicesVM>()
                 });
             }
         }

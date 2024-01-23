@@ -4,6 +4,6 @@ namespace ZatcaWebApp_V2.DataModel.Repository.Interface
 {
     public interface IReportsRepository
     {
-        Task<List<InvoicesVM>> GetInvoicesAsync(int PageNumber = 0, int PageSize = 5);
+        Task<List<InvoicesVM>> GetInvoicesAsync(List<KeyValuePair<string, string>> keyValues, int PageNumber = 0, int PageSize = 5);
     }
 }
